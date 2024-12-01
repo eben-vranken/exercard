@@ -3,19 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #1e1e1e;
+  --text-main: rgba(255, 255, 255, 0.75);
+  --text-medium: rgba(255, 255, 255, 0.5);
+  --text-light: rgba(255, 255, 255, 0.25);
+  --text-ultralight: rgba(255, 255, 255, 0.15);
+  --primary: 67, 87, 236;
 }
 
 body {
-  color: var(--foreground);
+  color: var(--text-medium);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+html {
+  font-size: 16px;
+
+  @screen md {
+    font-size: 17px;
+  }
+
+  @screen lg {
+    font-size: 18px;
+  }
 }
