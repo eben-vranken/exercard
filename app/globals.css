@@ -16,15 +16,3 @@ body {
   background: var(--background);
   font-family: "Inter", Arial, Helvetica, sans-serif;
 }
-
-html {
-  font-size: 16px;
-
-  @screen md {
-    font-size: 17px;
-  }
-
-  @screen lg {
-    font-size: 18px;
-  }
-}

@@ -14,52 +14,39 @@ export default function Home() {
           </p>
         </section>
 
-        {/* Panel Grid */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[10px] h-full">
-          <section className="grid grid-rows-2 gap-[10px]">
-            <section className="rounded-md border border-white/5  p-[10px] flex flex-col justify-between h-full relative overflow-hidden">
-              <span className="font-semibold text-responsive-lg">
-                Streak
-              </span>
-            </section>
-            <section className="rounded-md border border-white/5  p-[10px] flex flex-col justify-between h-full relative overflow-hidden">
-              <span className="font-semibold text-responsive-lg">
-                Weakly Study Time
-              </span>
-            </section>
+        {/* Panel Grid Layout */}
+        <section className="grid grid-cols-1 gap-[10px] md:grid-cols-2 lg:grid-cols-3 h-full overflow-auto">
+          {/* Weekly Study Time */}
+          <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
+            <span className="font-semibold text-responsive-lg">Weekly Study Time</span>
+
           </section>
 
-          <section className="rounded-md border border-white/5  p-[10px] flex flex-col justify-between h-full relative overflow-hidden">
-            <span className="font-semibold text-responsive-lg">
-              Quick Start
-            </span>
+          {/* Quick Start Panel */}
+          <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
+            <span className="font-semibold text-responsive-lg">Quick Start</span>
           </section>
 
-          <section className="rounded-md border border-white/5  p-[10px] flex flex-col justify-between h-full relative overflow-hidden">
-            <span className="font-semibold text-responsive-lg">
-              Recent Activity
-            </span>
+          {/* Recent Activity Panel */}
+          <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
+            <span className="font-semibold text-responsive-lg">Recent Activity</span>
           </section>
 
-          <section className="rounded-md border border-white/5  p-[10px] flex flex-col justify-between h-full relative overflow-hidden">
-            <span className="font-semibold text-responsive-lg">
-              Featured Deck
-            </span>
-          </section>
-          <section className="rounded-md border border-white/5  p-[10px] flex flex-col justify-between h-full relative overflow-hidden">
-            <span className="font-semibold text-responsive-lg">
-              Flashcard Progress
-            </span>
+          {/* Featured Deck Panel */}
+          <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
+            <span className="font-semibold text-responsive-lg">Featured Deck</span>
           </section>
 
-          <section className="rounded-md border border-white/5  p-[10px] flex flex-col justify-between h-full relative overflow-hidden">
-            <span className="font-semibold text-responsive-lg">
+          {/* Flashcard Progress Panel */}
+          <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
+            <span className="font-semibold text-responsive-lg">Flashcard Progress</span>
+          </section>
 
-            </span>
+          {/* Achievements */}
+          <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
+            <span className="font-semibold text-responsive-lg">Achievements</span>
           </section>
         </section>
-
-
       </section>
     </section>
   );

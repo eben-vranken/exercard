@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
     }, [])
 
     return (
-        <aside className="h-full w-1/4 border-r border-white border-opacity-5 flex flex-col relative overflow-hidden">
+        <aside className="h-full w-1/4 border-r border-white border-opacity-5 flex-col relative overflow-hidden flex">
             {/* Sidebar Title */}
             <section className="w-full h-11 flex justify-between items-center p-[10px]">
                 <h1 className="text-primary font-bold text-responsive-lg">Exercard</h1>
