@@ -1,10 +1,10 @@
 Exercard aims to be a free and open-source equivalent of popular flashcard applications.
 
-Exercard is built on Tauri, with NextJS and TailwindCSS on the front-end.
-
 [Read more](https://app.milanote.com/publish-preview/1ThT4u10M1lr1V) about it here
 
 ## Getting Started
+
+Exercard is built on Tauri, with NextJS and TailwindCSS on the front-end.
 
 Running locally in a development window:
 
