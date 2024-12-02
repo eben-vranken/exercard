@@ -30,10 +30,13 @@ const createManual: React.FC = () => {
             const result = await useCreateDeck(deckData);
 
             if (result.status == "ok") {
-                console.log("Success")
+                // Will need to forward to the just created deck
+                // In the deck explorer
+                console.log('Deck creation success')
             } else {
                 console.error(result.message)
             }
+
         } catch (err: unknown) {
             console.error('Unexpected error: ', err)
         }
