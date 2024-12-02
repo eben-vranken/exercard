@@ -12,10 +12,10 @@ const Sidebar: React.FC = () => {
     }, [])
 
     return (
-        <aside className="h-full w-1/4 border-r border-white border-opacity-5 flex-col relative overflow-hidden flex">
+        <aside className="h-full hidden md:flex md:min-w-52 lg:min-w-96 border-r border-white border-opacity-5 flex-col relative overflow-hidden ">
             {/* Sidebar Title */}
             <section className="w-full h-11 flex justify-between items-center p-[10px]">
-                <h1 className="text-primary font-bold text-responsive-lg">Exercard</h1>
+                <h1 className="text-primary font-bold">Exercard</h1>
 
                 {/* Icons */}
                 <section className="flex items-center gap-x-2 text-light z-10">

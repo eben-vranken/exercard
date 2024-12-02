@@ -18,33 +18,33 @@ export default function Home() {
         <section className="grid grid-cols-1 gap-[10px] md:grid-cols-2 lg:grid-cols-3 h-full overflow-auto">
           {/* Weekly Study Time */}
           <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
-            <span className="font-semibold text-responsive-lg">Weekly Study Time</span>
+            <span className="font-semibold">Weekly Study Time</span>
 
           </section>
 
           {/* Quick Start Panel */}
           <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
-            <span className="font-semibold text-responsive-lg">Quick Start</span>
+            <span className="font-semibold">Quick Start</span>
           </section>
 
           {/* Recent Activity Panel */}
           <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
-            <span className="font-semibold text-responsive-lg">Recent Activity</span>
+            <span className="font-semibold">Recent Activity</span>
           </section>
 
           {/* Featured Deck Panel */}
           <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
-            <span className="font-semibold text-responsive-lg">Featured Deck</span>
+            <span className="font-semibold">Featured Deck</span>
           </section>
 
           {/* Flashcard Progress Panel */}
           <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
-            <span className="font-semibold text-responsive-lg">Flashcard Progress</span>
+            <span className="font-semibold">Flashcard Progress</span>
           </section>
 
           {/* Achievements */}
           <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
-            <span className="font-semibold text-responsive-lg">Achievements</span>
+            <span className="font-semibold">Achievements</span>
           </section>
         </section>
       </section>
