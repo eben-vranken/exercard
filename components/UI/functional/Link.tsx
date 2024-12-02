@@ -1,19 +1,24 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface linkProps {
-    content: React.ReactNode,
-    href: string,
+interface LinkProps {
+    content: React.ReactNode;
+    href: string;
 }
 
-const CustomLink: React.FC<linkProps> = ({ content, href }) => {
-    const pathname = usePathname()
+const CustomLink: React.FC<LinkProps> = ({ content, href }) => {
+    const pathname = usePathname();
+
+    const isActive = href === "/" ? pathname === href : pathname.startsWith(href);
 
     return (
-        <Link href={href} className={`hover:opacity-75 ${pathname === href ? 'text-primary opacity-75' : ''}`}>
+        <Link
+            href={href}
+            className={`hover:opacity-75 ${isActive ? 'text-primary opacity-75' : ''}`}
+        >
             {content}
         </Link>
-    )
-}
+    );
+};
 
-export default CustomLink
+export default CustomLink;
