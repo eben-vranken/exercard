@@ -16,3 +16,22 @@ body {
   background: var(--background);
   font-family: "Inter", Arial, Helvetica, sans-serif;
 }
+
+/*                 */
+/* Custom Elements */
+/*                 */
+.styled-input {
+  border-radius: 2px;
+  padding: 5px 10px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  outline: none;
+  font-size: 14px;
+}
+
+.styled-button {
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: rgb(var(--primary));
+  font-weight: 600;
+}
