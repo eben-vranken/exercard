@@ -2,7 +2,7 @@ import Navbar from "@/components/UI/functional/Navbar";
 
 export default function Home() {
   return (
-    <section className="w-full flex flex-col h-screen">
+    <main className="w-full flex flex-col">
       <Navbar pageTitle="Home" />
 
       <section className="p-[10px] h-full flex flex-col">
@@ -48,6 +48,6 @@ export default function Home() {
           </section>
         </section>
       </section>
-    </section>
+    </main>
   );
 }
