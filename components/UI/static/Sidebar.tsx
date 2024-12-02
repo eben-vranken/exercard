@@ -42,7 +42,8 @@ const Sidebar: React.FC = () => {
                     <CustomLink content={"Deck Library"} href={"/deck-library"} />
                 </section>
 
-                <section className="opacity-5 w-3/4 border-[1.5px] my-4" />
+                {/* Horizontal Divider */}
+                <section className="opacity-5 border my-4" />
 
                 {/* Decks */}
                 <span className="text-xs text-ultralight">Decks</span>
