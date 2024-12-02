@@ -1,23 +1,39 @@
+'use client';
+
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface LinkProps {
     content: React.ReactNode;
-    href: string;
+    href?: string;
+    back?: boolean;
 }
 
-const CustomLink: React.FC<LinkProps> = ({ content, href }) => {
+const CustomLink: React.FC<LinkProps> = ({ content, href = "", back = false }) => {
+    const router = useRouter();
     const pathname = usePathname();
 
     const isActive = href === "/" ? pathname === href : pathname.startsWith(href);
 
+    const handleClick = () => {
+        if (back) {
+            router.back();
+        }
+    };
+
     return (
-        <Link
-            href={href}
-            className={`hover:opacity-75 ${isActive ? 'text-primary opacity-75' : ''}`}
+        <section
+            onClick={back ? handleClick : undefined}
+            className={`w-fit hover:opacity-75 cursor-pointer ${isActive ? 'text-primary opacity-75' : ''}`}
         >
-            {content}
-        </Link>
+            {href && !back ? (
+                <Link href={href}>
+                    {content}
+                </Link>
+            ) : (
+                content
+            )}
+        </section>
     );
 };
 

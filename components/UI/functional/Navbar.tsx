@@ -1,37 +1,51 @@
 'use client';
 
-import React, { useCallback } from "react";
-import { getCurrentWindow } from "@tauri-apps/api/window";
+import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
+import React, { useCallback, useEffect, useState } from "react";
+import CustomLink from "./Link";
 
 interface NavProps {
-    pageTitle: string;
+    pageTitle?: string;
+    back?: boolean;
 }
 
-const Navbar: React.FC<NavProps> = ({ pageTitle }) => {
-    const AppWindow = React.useMemo(() => getCurrentWindow(), []);
+const Navbar: React.FC<NavProps> = ({ pageTitle = '', back = false }) => {
+    const [AppWindow, setAppWindow] = useState<any>(null);
+
+    useEffect(() => {
+        import("@tauri-apps/api/window").then(({ getCurrentWindow }) => {
+            setAppWindow(getCurrentWindow());
+        });
+    }, []);
 
     const minimizeWindow = useCallback(() => {
-        AppWindow.minimize();
+        AppWindow?.minimize();
     }, [AppWindow]);
 
     const maximizeWindow = useCallback(() => {
-        AppWindow.toggleMaximize();
+        AppWindow?.toggleMaximize();
     }, [AppWindow]);
 
     const closeWindow = useCallback(() => {
-        AppWindow.close();
+        AppWindow?.close();
     }, [AppWindow]);
 
     const buttonStyles = "aspect-square w-3 rounded-full cursor-pointer hover:opacity-75";
 
     return (
-        <nav className="h-11 flex items-center p-[10px] justify-between">
+        <nav className="h-11 flex items-center p-[10px] justify-between relative" data-tauri-drag-region >
             {/* Page Title */}
-            <section>
+            <section className="flex items-center justify-center gap-x-2">
+                {back && (
+                    <section className="z-10 text-light h-min">
+                        <CustomLink back content={<ArrowLeft size={20} />} />
+                    </section>
+                )}
                 <h1 className="font-bold text-main">
                     {pageTitle}
                 </h1>
             </section>
+
 
             {/* Window Control */}
             <section className="flex items-center gap-x-2 z-10">

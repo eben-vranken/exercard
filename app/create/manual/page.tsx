@@ -3,7 +3,7 @@ import Navbar from "@/components/UI/functional/Navbar"
 const createManual: React.FC = () => {
     return (
         <main className="w-full">
-            <Navbar pageTitle="Create" />
+            <Navbar back pageTitle="Test" />
 
             <section className="p-[10px] h-full flex flex-col">
                 {/* Welcome message */}

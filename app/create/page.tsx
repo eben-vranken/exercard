@@ -5,7 +5,7 @@ import Link from "next/link"
 const Create: React.FC = () => {
     return (
         <main className="w-full flex flex-col">
-            <Navbar pageTitle="Create" />
+            <Navbar />
 
             <section className="p-[10px] h-full flex flex-col">
                 {/* Welcome message */}

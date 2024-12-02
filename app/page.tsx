@@ -15,7 +15,7 @@ export default function Home() {
         </section>
 
         {/* Panel Grid Layout */}
-        <section className="grid grid-cols-1 gap-[10px] md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 h-full overflow-auto">
+        <section className="grid grid-cols-1 gap-[10px] md:grid-cols-2 lg:grid-cols-2 xl11:grid-cols-3 h-full overflow-auto">
           {/* Weekly Study Time */}
           <section className="flex flex-col w-full rounded-md border border-white/5 p-[10px]">
             <span className="font-semibold">Weekly Study Time</span>

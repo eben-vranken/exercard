@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Sidebar from "@/components/UI/static/Sidebar";
-import Titlebar from "@/components/UI/static/Titlebar";
 
 
 const inter = localFont({
@@ -24,7 +23,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased flex h-screen select-none overflow-hidden`}>
-        <Titlebar />
         <Sidebar />
         {children}
       </body>
