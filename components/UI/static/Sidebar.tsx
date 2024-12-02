@@ -1,6 +1,6 @@
 'use client'
 
-import { Gear, UserCircle } from "@phosphor-icons/react/dist/ssr";
+import { Gear, Stack, UserCircle } from "@phosphor-icons/react/dist/ssr";
 import React, { useEffect, useState } from "react";
 import CustomLink from "@/components/UI/functional/Link";
 
@@ -13,9 +13,15 @@ const Sidebar: React.FC = () => {
 
     return (
         <aside className="h-full hidden md:flex md:min-w-52 lg:min-w-96 border-r border-white border-opacity-5 flex-col relative overflow-hidden ">
-            {/* Sidebar Title */}
             <section className="w-full h-11 flex justify-between items-center p-[10px]">
-                <h1 className="text-primary font-bold">Exercard</h1>
+
+                {/* Sidebar Title */}
+                <section className="flex items-center gap-x-2">
+                    <Stack size={25} className="text-primary" />
+                    <h1 className="font-bold">
+                        Exercard
+                    </h1>
+                </section>
 
                 {/* Icons */}
                 <section className="flex items-center gap-x-2 text-light z-10">
