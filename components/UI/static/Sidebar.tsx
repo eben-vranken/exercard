@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
     }, [])
 
     return (
-        <aside className="h-full flex lg:min-w-72 xl:min-w-96 border-r border-white border-opacity-5 flex-col relative overflow-hidden ">
+        <aside className="h-full hidden lg:flex lg:min-w-72 xl:min-w-96 border-r border-white border-opacity-5 flex-col relative overflow-hidden ">
             <section className="w-full h-11 flex justify-between items-center p-[10px]">
 
                 {/* Sidebar Title */}
