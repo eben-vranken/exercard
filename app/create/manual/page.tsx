@@ -3,7 +3,7 @@ import Navbar from "@/components/UI/functional/Navbar"
 const createManual: React.FC = () => {
     return (
         <main className="w-full">
-            <Navbar back pageTitle="Test" />
+            <Navbar back />
 
             <section className="p-[10px] h-full flex flex-col">
                 {/* Welcome message */}
@@ -12,6 +12,10 @@ const createManual: React.FC = () => {
                     <p className="text-responsive-sm text-light">
                         Customize every detail of your deck by adding cards yourself.
                     </p>
+                </section>
+
+                <section>
+
                 </section>
             </section>
         </main>

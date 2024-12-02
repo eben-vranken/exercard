@@ -13,7 +13,7 @@ const Sidebar: React.FC = () => {
 
     return (
         <aside className="h-full hidden lg:flex lg:min-w-72 xl:min-w-96 border-r border-white border-opacity-5 flex-col relative overflow-hidden ">
-            <section className="w-full h-11 flex justify-between items-center p-[10px]" data-tauri-drag-region>
+            <section className="w-full h-11 flex justify-between items-center p-[10px] z-10" data-tauri-drag-region>
                 {/* Sidebar Title */}
                 <section className="flex items-center gap-x-2">
                     <Stack size={25} className="text-primary" />
