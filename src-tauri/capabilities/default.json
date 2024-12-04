@@ -22,7 +22,14 @@
         }
       ]
     },
-    "fs:allow-create",
+    {
+      "identifier": "fs:allow-create",
+      "allow": [
+        {
+          "path": "$APPLOCALDATA/**"
+        }
+      ]
+    },
     "fs:allow-write",
     "core:resources:allow-close"
   ]
