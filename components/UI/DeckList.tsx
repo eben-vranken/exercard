@@ -38,7 +38,7 @@ const DeckList: React.FC = () => {
             {userDecks?.length > 0 ? <section>
                 {
                     userDecks.map((deck, id) => {
-                        return (<CustomLink href={`deck?deck=${deck.name.split('.')[0]}`} key={id} content={deck.name.split('.')[0]}></CustomLink>)
+                        return (<CustomLink href={`/deck?deck=${deck.name.split('.')[0]}`} key={id} content={deck.name.split('.')[0]}></CustomLink>)
                     })
                 }
             </section> : <span>No decks</span>}
