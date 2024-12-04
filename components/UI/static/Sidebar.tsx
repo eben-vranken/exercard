@@ -1,15 +1,12 @@
 'use client'
 
 import { Gear, Stack, UserCircle } from "@phosphor-icons/react/dist/ssr";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CustomLink from "@/components/UI/functional/Link";
+import DeckList from "../DeckList";
 
 const Sidebar: React.FC = () => {
-    const [userDecks, setUserDecks] = useState([]);
 
-    useEffect(() => {
-        setUserDecks([])
-    }, [])
 
     return (
         <aside className="h-full hidden md:flex md:min-w-72 xl:min-w-96 border-r border-white border-opacity-5 flex-col relative overflow-hidden ">
@@ -46,9 +43,7 @@ const Sidebar: React.FC = () => {
 
                 {/* Decks */}
                 <span className="text-xs text-ultralight">Decks</span>
-                <section className="flex flex-col gap-y-2 text-light">
-                    {userDecks.length > 0 ? "Decks present" : <span>No decks</span>}
-                </section>
+                <DeckList />
             </section>
         </aside>
     );
