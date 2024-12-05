@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import useCreateDeck from "@/hooks/filesystem/deck/useCreateDeck";
+import { useRouter } from 'next/navigation';
 
 // Compontents
 import Navbar from "@/components/UI/functional/Navbar"
@@ -13,7 +14,7 @@ interface DeckData {
 
 const createManual: React.FC = () => {
     const [deckData, setDeckData] = useState<DeckData>({ name: '', description: '' })
-
+    const router = useRouter()
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.currentTarget;
 
@@ -30,9 +31,12 @@ const createManual: React.FC = () => {
             const result = await useCreateDeck(deckData);
 
             if (result.status == "ok") {
-                // Will need to forward to the just created deck
-                // In the deck explorer
-                console.log('Deck creation success')
+                console.log(deckData.name)
+                setTimeout(() => {
+                    const newPath = ``
+                    router.push(`/deck?deckName=${deckData.name}.json`);
+                    console.log(newPath)
+                }, 500)
             } else {
                 console.error(result.message)
             }
