@@ -3,11 +3,9 @@
 import { Gear, Stack, UserCircle } from "@phosphor-icons/react/dist/ssr";
 import React from "react";
 import CustomLink from "@/components/UI/functional/Link";
-import DeckList from "../DeckList";
+import DeckList from "../functional/DeckList";
 
 const Sidebar: React.FC = () => {
-
-
     return (
         <aside className="h-full hidden md:flex md:min-w-72 xl:min-w-96 border-r border-white border-opacity-5 flex-col relative overflow-hidden ">
             <section className="w-full h-11 flex justify-between items-center p-[10px] z-10" data-tauri-drag-region>
