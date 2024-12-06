@@ -3,6 +3,18 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Sidebar from "@/components/UI/static/Sidebar";
 
+declare global {
+  interface Window {
+    __TAURI__: any;
+  }
+
+  interface Deck {
+    id: number;
+    name: string;
+    description: string;
+  }
+}
+
 
 const inter = localFont({
   src: "./fonts/Inter.ttf",

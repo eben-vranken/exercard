@@ -12,9 +12,10 @@
     "@phosphor-icons/react": "^2.1.7",
     "@tauri-apps/api": "^2.1.1",
     "@tauri-apps/plugin-fs": "^2.0.3",
+    "@tauri-apps/plugin-sql": "^2.0.2",
     "next": "15.0.3",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "^20",

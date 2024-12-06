@@ -13,25 +13,16 @@
     "core:window:allow-toggle-maximize",
     "core:window:allow-internal-toggle-maximize",
     "core:window:allow-start-dragging",
+    "fs:allow-write",
+    "core:resources:allow-close",
+    "sql:default",
+    "sql:allow-load",
+    "sql:allow-execute",
+    "sql:allow-select",
+    "sql:allow-close",
     "fs:default",
     {
       "identifier": "fs:scope",
-      "allow": [
-        {
-          "path": "$APPLOCALDATA/*"
-        }
-      ]
-    },
-    {
-      "identifier": "fs:allow-create",
-      "allow": [
-        {
-          "path": "$APPLOCALDATA/**"
-        }
-      ]
-    },
-    {
-      "identifier": "fs:allow-read-text-file",
       "allow": [
         {
           "path": "$APPLOCALDATA/**"
@@ -42,11 +33,9 @@
       "identifier": "fs:allow-watch",
       "allow": [
         {
-          "path": "$APPLOCALDATA/**"
+          "path": "$APPDATA"
         }
       ]
-    },
-    "fs:allow-write",
-    "core:resources:allow-close"
+    }
   ]
 }

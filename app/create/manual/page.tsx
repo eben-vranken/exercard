@@ -34,15 +34,15 @@ const createManual: React.FC = () => {
                 console.log(deckData.name)
                 setTimeout(() => {
                     const newPath = ``
-                    router.push(`/deck?deckName=${deckData.name}.json`);
+                    router.push(`/deck?deckName=${deckData.name}`);
                     console.log(newPath)
-                }, 500)
+                }, 1000)
             } else {
                 console.error(result.message)
             }
 
         } catch (err: unknown) {
-            console.error('Unexpected error: ', err)
+            console.error('Unexpected error when creating deck: ', err)
         }
     }
 

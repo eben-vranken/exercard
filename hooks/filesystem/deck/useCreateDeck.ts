@@ -1,4 +1,5 @@
 import { exists, create, mkdir, BaseDirectory } from "@tauri-apps/plugin-fs"
+import Database from "@tauri-apps/plugin-sql";
 
 interface Deck {
     name: string;
@@ -7,28 +8,19 @@ interface Deck {
 
 const useCreateDeck = async ({ name, description }: Deck): Promise<{ status: string, message: string }> => {
     try {
-        // Check if decks folder exists
-        const decksDirExists = await exists('decks', {
-            baseDir: BaseDirectory.AppLocalData,
-        })
+        const db = await Database.load("sqlite:decks.db");
 
-        if (!decksDirExists) {
-            await mkdir('decks', {
-                baseDir: BaseDirectory.AppLocalData
-            })
-        }
-
-        const file = await create(`decks/${name}.json`, { baseDir: BaseDirectory.AppLocalData });
-        await file.write(new TextEncoder().encode(JSON.stringify({ name, description })));
-        await file.close();
-
+        await db.execute("INSERT INTO decks (name, description) VALUES ($1, $2)", [
+            name,
+            description,
+        ]);
 
         return { status: 'ok', message: 'Deck created successfully.' }
     } catch (err: unknown) {
         if (err instanceof Error) {
             return { status: 'error', message: `Failed to create deck: ${err.message}` }
         }
-        return { status: 'error', message: 'An unknown error occurred.' }
+        return { status: 'error', message: 'An unknown error occurred when creating deck.' }
     }
 }
 

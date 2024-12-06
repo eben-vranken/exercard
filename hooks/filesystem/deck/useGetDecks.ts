@@ -1,9 +1,16 @@
-import { readDir, BaseDirectory, DirEntry } from '@tauri-apps/plugin-fs'
+import Database from "@tauri-apps/plugin-sql"
 
-const useGetDecks = async (): Promise<{ status: string, decks?: DirEntry[], message?: string }> => {
+interface Deck {
+    id: number;
+    name: string;
+    description: string;
+}
+
+const useGetDecks = async () => {
     try {
-        const entries = await readDir('decks', { baseDir: BaseDirectory.AppLocalData })
-        return { status: 'ok', decks: entries }
+        const db = await Database.load('sqlite:decks.db');
+        const dbDecks = await db.select<Deck[]>("SELECT * FROM decks");
+        return { status: 'ok', decks: dbDecks }
     } catch (err: unknown) {
         if (err instanceof Error) {
             return { status: 'error', message: `Failed to fetch decks: ${err.message}` }

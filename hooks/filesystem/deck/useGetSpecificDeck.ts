@@ -1,21 +1,22 @@
-import { BaseDirectory, readTextFile } from "@tauri-apps/plugin-fs";
+import Database from "@tauri-apps/plugin-sql";
 
-const useGetSpecificDeck = async (deckName: string) => {
+const useGetSpecificDeck = async (deckName: string): Promise<{ status: string, deck?: Deck, message?: string }> => {
     try {
-        console.log(deckName)
+        const db = await Database.load("sqlite:decks.db");
 
-        const deck = await readTextFile(`decks/${deckName}`, {
-            baseDir: BaseDirectory.AppLocalData,
-        });
+        const result = await db.select<Deck[]>("SELECT * FROM decks WHERE name = $1", [deckName]);
 
-
-        return { status: 'ok', deck: deck }
+        if (result.length > 0) {
+            return { status: 'ok', deck: result[0] };
+        } else {
+            return { status: 'error', message: `Deck with name "${deckName}" not found.` };
+        }
     } catch (err: unknown) {
         if (err instanceof Error) {
-            return { status: 'error', message: `Failed to fetch decks: ${err.message}` }
+            return { status: 'error', message: `Failed to fetch deck: ${err.message}` };
         }
-        return { status: 'error', message: 'An unknown error occurred.' }
+        return { status: 'error', message: 'An unknown error occurred when fetching specific deck' };
     }
 }
 
-export default useGetSpecificDeck
+export default useGetSpecificDeck;

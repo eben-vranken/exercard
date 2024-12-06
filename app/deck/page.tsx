@@ -29,13 +29,14 @@ const Deck: React.FC = () => {
 
         if (results.status === 'ok') {
             if (results.deck) {
-                const jsonDeck = JSON.parse(results.deck)
+                const jsonDeck = results.deck
                 setDeck(jsonDeck)
             }
         } else {
-            console.error(results.message)
+            console.error(`Unexpected error when fetching deck ${results.message}`)
         }
     }
+
 
     useEffect(() => {
         fetchDeck()

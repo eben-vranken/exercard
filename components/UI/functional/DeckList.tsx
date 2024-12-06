@@ -1,12 +1,18 @@
 'use client'
 
 import useGetDecks from "@/hooks/filesystem/deck/useGetDecks";
-import { BaseDirectory, DirEntry, watch } from "@tauri-apps/plugin-fs";
+import { BaseDirectory, watch } from "@tauri-apps/plugin-fs";
 import { useEffect, useState } from "react";
 import CustomLink from "./Link";
 
+interface Deck {
+    id: number;
+    name: string;
+    description: string;
+}
+
 const DeckList: React.FC = () => {
-    const [userDecks, setUserDecks] = useState<DirEntry[]>();
+    const [userDecks, setUserDecks] = useState<Deck[]>();
 
     const fetchDecks = async () => {
         const results = await useGetDecks()
@@ -21,11 +27,11 @@ const DeckList: React.FC = () => {
     const startWatcher = async () => {
         console.log('started watcher')
         await watch(
-            'decks',
+            '',
             (event) => {
                 fetchDecks()
             },
-            { baseDir: BaseDirectory.AppLocalData, delayMs: 500 }
+            { baseDir: BaseDirectory.AppData, delayMs: 500 }
         )
     }
 
@@ -35,8 +41,6 @@ const DeckList: React.FC = () => {
         fetchDecks();
         startWatcher();
     }, [])
-
-
 
     if (!userDecks) return (
         < section className="flex flex-col gap-y-2 text-light" >
