@@ -3,6 +3,7 @@
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 import React, { useCallback, useEffect, useState } from "react";
 import CustomLink from "./Link";
+import { Window } from "@tauri-apps/api/window";
 
 interface NavProps {
     pageTitle?: string;
@@ -10,7 +11,7 @@ interface NavProps {
 }
 
 const Navbar: React.FC<NavProps> = ({ pageTitle = '', back = false }) => {
-    const [AppWindow, setAppWindow] = useState<any>(null);
+    const [AppWindow, setAppWindow] = useState<Window>();
 
     useEffect(() => {
         import("@tauri-apps/api/window").then(({ getCurrentWindow }) => {

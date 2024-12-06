@@ -28,15 +28,13 @@ const DeckList: React.FC = () => {
         console.log('started watcher')
         await watch(
             '',
-            (event) => {
+            () => {
                 fetchDecks()
             },
             { baseDir: BaseDirectory.AppData, delayMs: 500 }
         )
     }
 
-    // This needs to be changed to a better refresh parameters.
-    // Currently this 'loads' the decks every time the user goes to a different page.
     useEffect(() => {
         fetchDecks();
         startWatcher();

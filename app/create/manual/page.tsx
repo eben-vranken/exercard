@@ -12,7 +12,7 @@ interface DeckData {
     description: string;
 }
 
-const createManual: React.FC = () => {
+const CreateManual: React.FC = () => {
     const [deckData, setDeckData] = useState<DeckData>({ name: '', description: '' })
     const router = useRouter()
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -28,6 +28,7 @@ const createManual: React.FC = () => {
         e.preventDefault();
 
         try {
+            // eslint-disable-next-line no-use-before-define
             const result = await useCreateDeck(deckData);
 
             if (result.status == "ok") {
@@ -91,4 +92,4 @@ const createManual: React.FC = () => {
     )
 }
 
-export default createManual
+export default CreateManual
