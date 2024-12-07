@@ -31,7 +31,7 @@ const DeckList: React.FC = () => {
             () => {
                 fetchDecks()
             },
-            { baseDir: BaseDirectory.AppData, delayMs: 500 }
+            { baseDir: BaseDirectory.AppData, delayMs: 10 }
         )
     }
 

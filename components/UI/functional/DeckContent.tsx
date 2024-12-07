@@ -2,19 +2,32 @@
 
 import Navbar from "@/components/UI/functional/Navbar";
 import useGetSpecificDeck from "@/hooks/filesystem/deck/useGetSpecificDeck";
-import { useSearchParams } from "next/navigation";
+import { Pencil, Trash } from "@phosphor-icons/react/dist/ssr";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import ConfirmModal from "./ConfirmModal";
+import useDeleteDeck from "@/hooks/filesystem/deck/useDeleteDeck";
 
 interface Deck {
+    id: number;
     name: string;
     description: string;
 }
 
 function DeckContent() {
+    const router = useRouter()
     const searchParams = useSearchParams();
     const [deck, setDeck] = useState<Deck | null>(null);
     const deckName = searchParams.get('deckName') || '';
 
+    // Deck states
+    const [isEditing, setIsEditing] = useState(false);
+    const [isDeleting, setIsDeleting] = useState<{
+        isVisible: boolean;
+        resolve?: (value: boolean) => void;
+    }>({ isVisible: false });
+
+    // Get deck
     useEffect(() => {
         const fetchDeck = async () => {
             if (deckName) {
@@ -29,17 +42,83 @@ function DeckContent() {
         fetchDeck();
     }, [deckName]);
 
-    if (!deck) {
-        return <section>Loading...</section>;
+
+    // Edit deck
+    const editDeck = () => {
+        setIsEditing(true);
     }
 
+    // Delete deck
+    const handleDeleteDeck = async () => {
+        const userConfirmed = await showConfirmModal();
+        if (userConfirmed) {
+            console.log("Deck deleted!");
+
+            if (deck) {
+                const result = await useDeleteDeck(deck);
+
+                console.log(result)
+                if (result.status === "ok") {
+                    router.push('/')
+                }
+            }
+        } else {
+            console.log("Deletion cancelled.");
+        }
+    };
+
+    const showConfirmModal = () => {
+        return new Promise<boolean>((resolve) => {
+            setIsDeleting({ isVisible: true, resolve });
+        });
+    };
     return (
         <main className="w-full">
-            <Navbar pageTitle={deck.name} />
+            <Navbar />
             <section className="p-[10px] h-full flex flex-col">
-                <section className="mb-2">
-                    <h2 className="text-responsive-md font-semibold">{deck.description}</h2>
-                </section>
+                {
+                    deck ?
+                        <section>
+                            {/* Deck Editing */}
+                            {
+                                isEditing
+                            }
+
+                            {
+                                isDeleting.isVisible && <ConfirmModal
+                                    title="Confirm deletion"
+                                    description="Once a deck is deleted, it cannot be revived."
+                                    onClose={(result) => {
+                                        isDeleting.resolve?.(result);
+                                        setIsDeleting({ isVisible: false });
+                                    }}
+                                />
+                            }
+
+                            <section className="flex items-center justify-between w-full">
+                                <section className="mb-2">
+                                    <h2 className="text-responsive-md font-semibold">{deck.name}</h2>
+                                    <p className="text-responsive-sm text-light">
+                                        {deck.description}
+                                    </p>
+                                </section>
+
+                                {/* Deck options */}
+                                <section className="flex gap-x-2">
+                                    <section className="gap-x-2 bg-[#F4AC45] rounded p-1 cursor-pointer hover:opacity-75" onClick={() => editDeck()}>
+                                        <Pencil size={25} />
+                                    </section>
+                                    <section className="gap-x-2 bg-[#D1462F] rounded p-1 cursor-pointer hover:opacity-75" onClick={() => handleDeleteDeck()}>
+                                        <Trash size={25} />
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                        :
+                        <section>
+                            Loading...
+                        </section>
+                }
             </section>
         </main>
     );
