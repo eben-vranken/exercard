@@ -32,12 +32,7 @@ const CreateManual: React.FC = () => {
             const result = await useCreateDeck(deckData);
 
             if (result.status == "ok") {
-                console.log(deckData.name)
-                setTimeout(() => {
-                    const newPath = ``
-                    router.push(`/deck?deckName=${deckData.name}`);
-                    console.log(newPath)
-                }, 1000)
+                router.push(`/deck?deckName=${deckData.name}`);
             } else {
                 console.error(result.message)
             }
