@@ -95,8 +95,8 @@ function DeckContent() {
                                 />
                             }
 
-                            <section className="flex items-center justify-between w-full">
-                                <section className="mb-2">
+                            <section className="flex items-center justify-between gap-x-4 w-full md:w-fit mb-2">
+                                <section className="flex items-center">
                                     <h2 className="text-responsive-md font-semibold">{deck.name}</h2>
                                     <p className="text-responsive-sm text-light">
                                         {deck.description}
@@ -104,11 +104,11 @@ function DeckContent() {
                                 </section>
 
                                 {/* Deck options */}
-                                <section className="flex gap-x-2">
-                                    <section className="gap-x-2 bg-[#F4AC45] rounded p-1 cursor-pointer hover:opacity-75" onClick={() => editDeck()}>
+                                <section className="flex gap-x-2 items-center">
+                                    <section className="gap-x-2 bg-[#F4AC45] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => editDeck()}>
                                         <Pencil size={25} />
                                     </section>
-                                    <section className="gap-x-2 bg-[#D1462F] rounded p-1 cursor-pointer hover:opacity-75" onClick={() => handleDeleteDeck()}>
+                                    <section className="gap-x-2 bg-[#D1462F] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => handleDeleteDeck()}>
                                         <Trash size={25} />
                                     </section>
                                 </section>
