@@ -73,12 +73,12 @@ function DeckContent() {
         });
     };
     return (
-        <main className="w-full">
+        <main className="w-full flex flex-col">
             <Navbar />
             <section className="p-[10px] h-full flex flex-col">
                 {
                     deck ?
-                        <section>
+                        <section className="flex gap-2 h-full">
                             {/* Deck Editing */}
                             {
                                 isEditing
@@ -95,26 +95,47 @@ function DeckContent() {
                                 />
                             }
 
-                            <section className="flex items-center justify-between gap-x-4 w-full mb-2">
-                                <section className="flex flex-col">
-                                    <h2 className="text-responsive-md font-semibold">{deck.name}</h2>
-                                    <p className="text-responsive-sm text-light">
-                                        {deck.description}
-                                        <span className="invisible">
-                                            {'template'}
-                                        </span>
-                                    </p>
+                            <section className="flex flex-col justify-between gap-x-4 w-full md:w-3/4 mb-2">
+                                <section className="flex items-center justify-between">
+                                    <section className="flex flex-col">
+                                        <h2 className="text-responsive-md font-semibold">{deck.name}</h2>
+                                        <p className="text-responsive-sm text-light">
+                                            {deck.description}
+                                            <span className="invisible">
+                                                {'template'}
+                                            </span>
+                                        </p>
+                                    </section>
+
+                                    {/* Deck options */}
+                                    <section className="flex gap-x-2 opacity-75">
+                                        <section className="gap-x-2 bg-[#F4AC45] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => editDeck()}>
+                                            <Pencil size={25} />
+                                        </section>
+                                        <section className="gap-x-2 bg-[#D1462F] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => handleDeleteDeck()}>
+                                            <Trash size={25} />
+                                        </section>
+                                    </section>
                                 </section>
 
-                                {/* Deck options */}
-                                <section className="flex gap-x-2 items-center">
-                                    <section className="gap-x-2 bg-[#F4AC45] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => editDeck()}>
-                                        <Pencil size={25} />
-                                    </section>
-                                    <section className="gap-x-2 bg-[#D1462F] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => handleDeleteDeck()}>
-                                        <Trash size={25} />
+
+                                {/* Main deck */}
+                                <section className="flex w-full h-full ">
+                                    {/* Cards & Activities */}
+                                    <section className="h-full">
+
                                     </section>
                                 </section>
+                            </section>
+
+
+
+                            {/* Deck Sidebar */}
+                            <section className="h-full w-full md:w-1/4 flex flex-col gap-1">
+                                <section className="flex-1 border border-white/5 rounded"></section>
+                                <section className="flex-1  border border-white/5 rounded"></section>
+                                <section className="flex-1  border border-white/5 rounded"></section>
+                                <section className="flex-1  border border-white/5 rounded"></section>
                             </section>
                         </section>
                         :
