@@ -2,11 +2,12 @@
 
 import Navbar from "@/components/UI/functional/Navbar";
 import useGetSpecificDeck from "@/hooks/filesystem/deck/useGetSpecificDeck";
-import { Pencil, Trash } from "@phosphor-icons/react/dist/ssr";
+import { Pencil, Plus, Trash } from "@phosphor-icons/react/dist/ssr";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import ConfirmModal from "./ConfirmModal";
 import useDeleteDeck from "@/hooks/filesystem/deck/useDeleteDeck";
+import useGetCards from "@/hooks/filesystem/card/useGetCards";
 
 interface Deck {
     id: number;
@@ -14,11 +15,22 @@ interface Deck {
     description: string;
 }
 
+interface Card {
+    deckId: number;
+    front: string;
+    back: string;
+    hint?: string;
+}
+
+
 function DeckContent() {
     const router = useRouter()
     const searchParams = useSearchParams();
-    const [deck, setDeck] = useState<Deck | null>(null);
     const deckName = searchParams.get('deckName') || '';
+
+    const [deck, setDeck] = useState<Deck | null>(null);
+    const [cards, setCards] = useState<Card[] | null>(null);
+
 
     // Deck states
     const [isEditing, setIsEditing] = useState(false);
@@ -42,6 +54,19 @@ function DeckContent() {
         fetchDeck();
     }, [deckName]);
 
+    // Get cards of deck once deck is fetched
+    useEffect(() => {
+        const fetchCards = async () => {
+            if (deck) {
+                const results = await useGetCards(deck.id)
+                if (results.status === 'ok' && results.data) {
+                    setCards(results.data);
+                } else {
+                    console.error(`Error fetching deck: ${results.message}`);
+                }
+            }
+        }
+    }, [deck])
 
     // Edit deck
     const editDeck = () => {
@@ -95,7 +120,7 @@ function DeckContent() {
                                 />
                             }
 
-                            <section className="flex flex-col justify-between w-full md:w-3/4 mb-2">
+                            <section className="flex flex-col justify-between w-full mb-2">
                                 <section className="flex items-center justify-between ">
                                     <section className="flex flex-col">
                                         <h2 className="text-responsive-md font-semibold">{deck.name}</h2>
@@ -109,6 +134,9 @@ function DeckContent() {
 
                                     {/* Deck options */}
                                     <section className="flex gap-x-2 opacity-75">
+                                        <section className="gap-x-2 bg-[#7FB069] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => editDeck()}>
+                                            <Plus size={25} />
+                                        </section>
                                         <section className="gap-x-2 bg-[#F4AC45] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => editDeck()}>
                                             <Pencil size={25} />
                                         </section>
@@ -120,22 +148,26 @@ function DeckContent() {
 
 
                                 {/* Main deck */}
-                                <section className="flex w-full h-full ">
-                                    {/* Cards & Activities */}
-                                    <section className="h-full">
+                                <section className="flex flex-col items-center w-full h-full">
+                                    {/* Cards */}
+                                    <section className="h-full flex items-center justify-center">
+                                        {
+                                            cards ?
+                                                <section>
 
+                                                </section>
+                                                :
+                                                <span>No cards yet!</span>
+                                        }
+                                    </section>
+
+                                    {/* Activities */}
+                                    <section className="h-[100px] w-full md:w-2/3 flex flex-col md:flex-row gap-x-1 text-light">
+                                        <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Quiz Me</section>
+                                        <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Let's Talk</section>
+                                        <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Explain It</section>
                                     </section>
                                 </section>
-                            </section>
-
-
-
-                            {/* Deck Sidebar */}
-                            <section className="h-full w-full md:w-1/4 flex flex-col gap-1">
-                                <section className="flex-1 border border-white/5 rounded"></section>
-                                <section className="flex-1  border border-white/5 rounded"></section>
-                                <section className="flex-1  border border-white/5 rounded"></section>
-                                <section className="flex-1  border border-white/5 rounded"></section>
                             </section>
                         </section>
                         :

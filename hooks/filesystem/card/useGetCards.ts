@@ -8,7 +8,7 @@ interface Card {
 }
 
 interface UseGetCardsResponse {
-    status: 'success' | 'error';
+    status: 'ok' | 'error';
     data?: Card[];
     message?: string;
 }
@@ -23,7 +23,7 @@ const useGetCards = async (deckId: number): Promise<UseGetCardsResponse> => {
         );
 
         return {
-            status: 'success',
+            status: 'ok',
             data: result as Card[],
         };
     } catch (err: unknown) {
