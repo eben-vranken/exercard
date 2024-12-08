@@ -66,6 +66,7 @@ function DeckContent() {
                 }
             }
         }
+        fetchCards();
     }, [deck])
 
     // Create cards
@@ -162,7 +163,7 @@ function DeckContent() {
 
                                                 </section>
                                                 :
-                                                <span>No cards yet!</span>
+                                                <span className="text-light">No cards yet!</span>
                                         }
                                     </section>
 
