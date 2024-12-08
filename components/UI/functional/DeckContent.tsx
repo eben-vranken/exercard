@@ -95,11 +95,14 @@ function DeckContent() {
                                 />
                             }
 
-                            <section className="flex items-center justify-between gap-x-4 w-full md:w-fit mb-2">
-                                <section className="flex items-center">
+                            <section className="flex items-center justify-between gap-x-4 w-full mb-2">
+                                <section className="flex flex-col">
                                     <h2 className="text-responsive-md font-semibold">{deck.name}</h2>
                                     <p className="text-responsive-sm text-light">
                                         {deck.description}
+                                        <span className="invisible">
+                                            {'template'}
+                                        </span>
                                     </p>
                                 </section>
 
