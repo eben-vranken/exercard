@@ -131,10 +131,11 @@ function DeckContent() {
                                     <section className="flex flex-col">
                                         <h2 className="text-responsive-md font-semibold">{deck.name}</h2>
                                         <p className="text-responsive-sm text-light">
-                                            {deck.description}
-                                            <span className="invisible">
-                                                {'template'}
-                                            </span>
+                                            {deck.description ? deck.description :
+                                                < span className="text-ultralight">
+                                                    No description
+                                                </span>
+                                            }
                                         </p>
                                     </section>
 
@@ -182,7 +183,7 @@ function DeckContent() {
                         </section>
                 }
             </section>
-        </main>
+        </main >
     );
 }
 
