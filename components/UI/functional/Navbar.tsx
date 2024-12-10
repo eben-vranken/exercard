@@ -42,7 +42,7 @@ const Navbar: React.FC<NavProps> = ({ pageTitle = '', back = false }) => {
                         <CustomLink back content={<ArrowLeft size={20} />} />
                     </section>
                 )}
-                <h1 className="font-bold text-main">
+                <h1 className="font-bold text-main mt-20">
                     {pageTitle}
                 </h1>
             </section>

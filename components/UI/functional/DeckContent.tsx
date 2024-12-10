@@ -118,7 +118,7 @@ function DeckContent() {
                             {
                                 isDeleting.isVisible && <ConfirmModal
                                     title="Confirm deletion"
-                                    description="Once a deck is deleted, it cannot be revived."
+                                    description="Once a deck is deleted, it cannot be restored."
                                     onClose={(result) => {
                                         isDeleting.resolve?.(result);
                                         setIsDeleting({ isVisible: false });
