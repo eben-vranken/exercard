@@ -8,6 +8,7 @@ import { Suspense, useEffect, useState } from "react";
 import ConfirmModal from "./ConfirmModal";
 import useDeleteDeck from "@/hooks/filesystem/deck/useDeleteDeck";
 import useGetCards from "@/hooks/filesystem/card/useGetCards";
+import Link from "next/link";
 
 interface Deck {
     id: number;
@@ -26,14 +27,12 @@ interface Card {
 function DeckContent() {
     const router = useRouter()
     const searchParams = useSearchParams();
-    const deckName = searchParams.get('deckName') || '';
+    const deckId = searchParams.get('deckId') || '';
 
     const [deck, setDeck] = useState<Deck | null>(null);
     const [cards, setCards] = useState<Card[] | null>(null);
 
-
     // Deck states
-    const [isEditing, setIsEditing] = useState(false);
     const [isDeleting, setIsDeleting] = useState<{
         isVisible: boolean;
         resolve?: (value: boolean) => void;
@@ -42,8 +41,8 @@ function DeckContent() {
     // Get deck
     useEffect(() => {
         const fetchDeck = async () => {
-            if (deckName) {
-                const results = await useGetSpecificDeck(deckName);
+            if (deckId) {
+                const results = await useGetSpecificDeck(deckId);
                 if (results.status === 'ok' && results.deck) {
                     setDeck(results.deck);
                 } else {
@@ -52,7 +51,7 @@ function DeckContent() {
             }
         };
         fetchDeck();
-    }, [deckName]);
+    }, [deckId]);
 
     // Get cards of deck once deck is fetched
     useEffect(() => {
@@ -72,11 +71,6 @@ function DeckContent() {
     // Create cards
     const createCards = () => {
 
-    }
-
-    // Edit deck
-    const editDeck = () => {
-        setIsEditing(true);
     }
 
     // Delete deck
@@ -104,17 +98,12 @@ function DeckContent() {
         });
     };
     return (
-        <main className="w-full flex flex-col">
+        <main className="w-full flex flex-col relative">
             <Navbar />
             <section className="p-[10px] h-full flex flex-col">
                 {
                     deck ?
                         <section className="flex gap-2 h-full">
-                            {/* Deck Editing */}
-                            {
-                                isEditing
-                            }
-
                             {
                                 isDeleting.isVisible && <ConfirmModal
                                     title="Confirm deletion"
@@ -144,9 +133,9 @@ function DeckContent() {
                                         <section className="gap-x-2 bg-[#7FB069] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => createCards()}>
                                             <Plus size={25} />
                                         </section>
-                                        <section className="gap-x-2 bg-[#F4AC45] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => editDeck()}>
+                                        <Link href={`/edit-deck?deckId=${deck.id}`} className="gap-x-2 bg-[#F4AC45] rounded py-1 px-2 cursor-pointer hover:opacity-75">
                                             <Pencil size={25} />
-                                        </section>
+                                        </Link>
                                         <section className="gap-x-2 bg-[#D1462F] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => handleDeleteDeck()}>
                                             <Trash size={25} />
                                         </section>

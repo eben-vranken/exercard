@@ -1,20 +1,42 @@
-'use client'
+'use client';
 
-import { useState } from "react"
-import useCreateDeck from "@/hooks/filesystem/deck/useCreateDeck";
-import { useRouter } from 'next/navigation';
-
-// Compontents
-import Navbar from "@/components/UI/functional/Navbar"
+import Navbar from "@/components/UI/functional/Navbar";
+import useEditDeck from "@/hooks/filesystem/deck/useEditDeck";
+import useGetSpecificDeck from "@/hooks/filesystem/deck/useGetSpecificDeck";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface DeckData {
     name: string;
     description: string;
 }
 
-const CreateManual: React.FC = () => {
+const EditDeck: React.FC = () => {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const deckId = searchParams.get('deckId') || '';
     const [deckData, setDeckData] = useState<DeckData>({ name: '', description: '' })
-    const router = useRouter()
+
+    const [deck, setDeck] = useState<Deck | null>(null);
+
+    // Get deck
+    useEffect(() => {
+        const fetchDeck = async () => {
+            if (deckId) {
+                const results = await useGetSpecificDeck(deckId);
+                if (results.status === 'ok' && results.deck) {
+                    setDeck(results.deck);
+                    setDeckData({
+                        name: results.deck.name || '',
+                        description: results.deck.description || ''
+                    });
+                } else {
+                    console.error(`Error fetching deck: ${results.message}`);
+                }
+            }
+        };
+        fetchDeck();
+    }, [deckId]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.currentTarget;
@@ -28,20 +50,20 @@ const CreateManual: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        try {
-            // eslint-disable-next-line no-use-before-define
-            const result = await useCreateDeck(deckData);
+        const response = await useEditDeck({
+            id: Number(deckId), // Ensure deckId is passed as a number
+            name: deckData.name,
+            description: deckData.description,
+        });
 
-            if (result.status == "ok") {
-                router.push(`/deck?deckName=${deckData.name}`);
-            } else {
-                console.error(result.message)
-            }
-
-        } catch (err: unknown) {
-            console.error('Unexpected error when creating deck: ', err)
+        if (response.status === 'ok') {
+            console.log(response.message);
+            router.push(`/deck?deckId=${deck?.id}`);
+        } else {
+            console.error(response.message);
         }
-    }
+    };
+
 
     return (
         <main className="w-full flex flex-col">
@@ -49,13 +71,14 @@ const CreateManual: React.FC = () => {
 
             <section className="p-[10px] h-full flex flex-col">
                 {/* Welcome message */}
-                <section className="mb-2">
-                    <h2 className="text-responsive-md font-semibold">Create manually</h2>
+                <section className="mb-2 ">
+                    <h2 className="text-responsive-md font-semibold">Edit your deck</h2>
                     <p className="text-responsive-sm text-light">
-                        Customize every detail of your deck by adding cards yourself.
+                        Ready for a change?
                     </p>
                 </section>
 
+                {/* Deck Content */}
                 <form className="h-full w-full flex flex-col gap-y-2 items-center justify-center" onSubmit={handleSubmit}>
                     <section className="flex flex-col w-full md:w-2/3 gap-y-1">
                         <section>
@@ -80,12 +103,12 @@ const CreateManual: React.FC = () => {
                     </section>
 
                     <section className="w-full md:w-2/3">
-                        <button type="submit" className="styled-button">Create</button>
+                        <button type="submit" className="styled-button">Edit</button>
                     </section>
                 </form>
             </section>
-        </main>
+        </main >
     )
 }
 
-export default CreateManual
+export default EditDeck;
