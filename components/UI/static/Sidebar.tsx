@@ -47,7 +47,7 @@ const Sidebar: React.FC = () => {
                     <CustomLink content={"Home"} href={"/"} />
                     <CustomLink content={"Analytics"} href={"/analytics"} />
                     <CustomLink content={"Calendar View"} href={"/calendar"} />
-                    <CustomLink content={"New Deck"} href={"/create"} />
+                    <CustomLink content={"New Deck"} href={"/create-deck"} />
                     <CustomLink content={"Deck Library"} href={"/deck-library"} />
                 </section>
 

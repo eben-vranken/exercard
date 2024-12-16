@@ -15,9 +15,8 @@ declare global {
   }
 }
 
-
 const inter = localFont({
-  src: "./fonts/Inter.ttf",
+  src: "../public/fonts/Inter.ttf",
   variable: "--font-inter",
   weight: "100 200 300 400 500 600 700 800 900",
 });
