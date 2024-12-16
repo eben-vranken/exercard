@@ -3,7 +3,7 @@
 import useGetDecks from "@/hooks/filesystem/deck/useGetDecks";
 import { BaseDirectory, watch } from "@tauri-apps/plugin-fs";
 import { useEffect, useState } from "react";
-import CustomLink from "./Link";
+import CustomLink from "../Link";
 
 interface Deck {
     id: number;

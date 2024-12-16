@@ -5,7 +5,7 @@ import useGetSpecificDeck from "@/hooks/filesystem/deck/useGetSpecificDeck";
 import { Pencil, Plus, Trash } from "@phosphor-icons/react/dist/ssr";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-import ConfirmModal from "./ConfirmModal";
+import ConfirmModal from "../ConfirmModal";
 import useDeleteDeck from "@/hooks/filesystem/deck/useDeleteDeck";
 import useGetCards from "@/hooks/filesystem/card/useGetCards";
 import Link from "next/link";

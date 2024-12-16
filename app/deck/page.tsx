@@ -1,6 +1,6 @@
 'use client';
 
-import DeckContent from "@/components/UI/functional/DeckContent";
+import DeckContent from "@/components/UI/functional/deck/DeckContent";
 import { Suspense } from "react";
 
 interface Deck {

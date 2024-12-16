@@ -3,7 +3,7 @@
 import { Gear, Stack, UserCircle, CaretDoubleLeft, CaretDoubleRight } from "@phosphor-icons/react/dist/ssr";
 import React, { useState } from "react";
 import CustomLink from "@/components/UI/functional/Link";
-import DeckList from "../functional/DeckList";
+import DeckList from "../functional/deck/DeckList";
 
 const Sidebar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(true);
