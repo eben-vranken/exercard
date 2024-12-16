@@ -51,7 +51,7 @@ const EditDeck: React.FC = () => {
         e.preventDefault();
 
         const response = await useEditDeck({
-            id: Number(deckId), // Ensure deckId is passed as a number
+            id: Number(deckId),
             name: deckData.name,
             description: deckData.description,
         });
