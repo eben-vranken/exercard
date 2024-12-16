@@ -1,4 +1,6 @@
+import AddCardComponent from "@/components/UI/functional/card/AddCard";
 import Navbar from "@/components/UI/functional/Navbar";
+import { Suspense } from "react";
 
 const AddCard: React.FC = () => {
     return (
@@ -12,6 +14,10 @@ const AddCard: React.FC = () => {
                         What do you want to learn?
                     </p>
                 </section>
+
+                <Suspense>
+                    <AddCardComponent />
+                </Suspense>
             </section>
         </main>
     )

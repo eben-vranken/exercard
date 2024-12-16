@@ -33,5 +33,5 @@ body {
   border-radius: 5px;
   padding: 5px 10px;
   background-color: rgb(var(--primary));
-  font-weight: 600;
+  font-weight: 400;
 }
