@@ -1,20 +1,20 @@
 import Navbar from "@/components/UI/functional/Navbar";
 
-const Page: React.FC = () => {
+const AddCard: React.FC = () => {
     return (
-        <section className="w-full">
+        <main className="w-full flex flex-col">
             <Navbar />
 
             <section className="p-[10px] h-full flex flex-col">
-                <section className="mb-2">
-                    <h2 className="text-responsive-md font-semibold">Page Not found</h2>
+                <section className="mb-2 ">
+                    <h2 className="text-responsive-md font-semibold">Add Cards</h2>
                     <p className="text-responsive-sm text-light">
-                        How did you end up here?
+                        What do you want to learn?
                     </p>
                 </section>
             </section>
-        </section>
+        </main>
     )
 }
 
-export default Page;
+export default AddCard;

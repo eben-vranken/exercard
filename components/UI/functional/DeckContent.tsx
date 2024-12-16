@@ -130,9 +130,9 @@ function DeckContent() {
 
                                     {/* Deck options */}
                                     <section className="flex gap-x-2 opacity-75">
-                                        <section className="gap-x-2 bg-[#7FB069] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => createCards()}>
+                                        <Link href={`/add-cards?deckId=${deck.id}`} className="gap-x-2 bg-[#7FB069] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => createCards()}>
                                             <Plus size={25} />
-                                        </section>
+                                        </Link>
                                         <Link href={`/edit-deck?deckId=${deck.id}`} className="gap-x-2 bg-[#F4AC45] rounded py-1 px-2 cursor-pointer hover:opacity-75">
                                             <Pencil size={25} />
                                         </Link>

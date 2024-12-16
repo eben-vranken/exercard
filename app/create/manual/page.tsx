@@ -48,7 +48,6 @@ const CreateManual: React.FC = () => {
             <Navbar />
 
             <section className="p-[10px] h-full flex flex-col">
-                {/* Welcome message */}
                 <section className="mb-2">
                     <h2 className="text-responsive-md font-semibold">Create manually</h2>
                     <p className="text-responsive-sm text-light">
