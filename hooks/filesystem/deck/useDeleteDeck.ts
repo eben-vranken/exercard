@@ -35,8 +35,4 @@ const useDeleteDeck = async (deck: Deck): Promise<{ status: string, message: str
     }
 };
 
-
-
-
-
 export default useDeleteDeck
