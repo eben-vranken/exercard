@@ -33,7 +33,7 @@ const CreateManual: React.FC = () => {
             const result = await useCreateDeck(deckData);
 
             if (result.status == "ok") {
-                router.push(`/deck?deckName=${deckData.name}`);
+                router.push(`/deck?deckId=${result.deckId}`);
             } else {
                 console.error(result.message)
             }
