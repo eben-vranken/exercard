@@ -5,7 +5,7 @@ export default function Home() {
     <main className="w-full flex flex-col">
       <Navbar />
 
-      <section className="p-[10px] h-full flex flex-col">
+      <section className="p-[10px] h-full flex flex-col ">
         {/* Welcome message */}
         <section className="mb-2 ">
           <h2 className="text-responsive-md font-semibold">Welcome Eben</h2>

@@ -90,7 +90,7 @@ const AddCardComponent: React.FC = () => {
     }
 
     return (
-        <section className="h-full flex justify-between">
+        <section className="h-full w-full flex overflow-hidden justify-between">
             <section className="w-full flex items-center justify-center">
                 {/* New Card Details */}
                 <form className="flex flex-col w-1/3 justify-center items-center gap-y-3 [&>*]:gap-y-1 [&>*]:w-full" onSubmit={handleSubmit}>
@@ -160,8 +160,8 @@ const AddCardComponent: React.FC = () => {
             </section>
 
             {/* Existing Card List */}
-            <section className={`w-1/3 h-full overflow-y-scroll ${!cards && 'flex items-center justify-center'}`} >
-                {cards ? <section className="flex flex-col gap-y-2 ">
+            <section className={`w-1/3 h-full overflow-y-auto ${cards?.length === 0 && 'flex items-center justify-center'}`} >
+                {cards?.length ? <section className="flex flex-col gap-y-2 ">
                     {cards.map((card, id) => {
                         return (
                             <section key={id} className="flex flex-col border border-white/10 rounded p-1">

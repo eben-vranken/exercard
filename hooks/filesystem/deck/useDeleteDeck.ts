@@ -6,18 +6,37 @@ interface Deck {
     description: string;
 }
 
-const useGetDecks = async (deck: Deck): Promise<{ status: string, message: string }> => {
+const useDeleteDeck = async (deck: Deck): Promise<{ status: string, message: string }> => {
     try {
         const db = await Database.load('sqlite:decks.db');
-        const result = await db.select<Deck[]>(`DELETE FROM decks WHERE id=${deck.id}`);
 
-        return { status: 'ok', message: 'Successfully deleted deck.' }
+        // Enable foreign key constraints
+        await db.execute('PRAGMA foreign_keys = ON;');
+
+        // Execute the deletion query
+        const result = await db.execute('DELETE FROM decks WHERE id = ?', [deck.id]);
+
+        // Log the result of the delete operation
+        console.log('Delete result:', result);
+
+        if (result.rowsAffected === 0) {
+            throw new Error('No deck found with the given ID.');
+        }
+
+        return { status: 'ok', message: 'Successfully deleted deck.' };
     } catch (err: unknown) {
         if (err instanceof Error) {
-            return { status: 'error', message: `Failed to fetch decks: ${err.message}` }
+            console.error('Error details:', err);
+            return { status: 'error', message: `Failed to delete deck: ${err.message}` };
         }
-        return { status: 'error', message: 'An unknown error occurred.' }
-    }
-}
 
-export default useGetDecks
+        console.error('Unknown error:', err);
+        return { status: 'error', message: 'An unknown error occurred.' };
+    }
+};
+
+
+
+
+
+export default useDeleteDeck

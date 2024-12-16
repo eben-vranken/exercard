@@ -77,13 +77,13 @@ function DeckContent() {
     const handleDeleteDeck = async () => {
         const userConfirmed = await showConfirmModal();
         if (userConfirmed) {
-            console.log("Deck deleted!");
 
             if (deck) {
                 const result = await useDeleteDeck(deck);
 
                 console.log(result)
                 if (result.status === "ok") {
+                    console.log("Deck deleted!");
                     router.push('/')
                 }
             }
@@ -102,7 +102,7 @@ function DeckContent() {
             <Navbar />
             <section className="p-[10px] h-full flex flex-col">
                 {
-                    deck ?
+                    deck && cards ?
                         <section className="flex gap-2 h-full">
                             {
                                 isDeleting.isVisible && <ConfirmModal
@@ -148,7 +148,7 @@ function DeckContent() {
                                     {/* Cards */}
                                     <section className="h-full flex items-center justify-center">
                                         {
-                                            cards ?
+                                            cards?.length > 0 ?
                                                 <section>
 
                                                 </section>

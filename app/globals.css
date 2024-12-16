@@ -35,3 +35,22 @@ body {
   background-color: rgb(var(--primary));
   font-weight: 400;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--primary));
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--primary), .5);
+}
