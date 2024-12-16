@@ -3,11 +3,11 @@ import Navbar from "@/components/UI/functional/Navbar";
 export default function Home() {
   return (
     <main className="w-full flex flex-col">
-      <Navbar pageTitle="Home" />
+      <Navbar />
 
       <section className="p-[10px] h-full flex flex-col">
         {/* Welcome message */}
-        <section className="mb-2 mt-6">
+        <section className="mb-2 ">
           <h2 className="text-responsive-md font-semibold">Welcome Eben</h2>
           <p className="text-responsive-sm text-light">
             Ready to level up your language learning?

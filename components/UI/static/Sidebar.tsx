@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
 
     return (
         <aside
-            className={`h-full bg-[#11111b] border-r border-white border-opacity-5 flex flex-col overflow-hidden transition-all duration-300 ${isOpen ? "w-72 md:w-96" : "w-0"
+            className={`h-full border-r border-white border-opacity-5 flex flex-col overflow-hidden transition-all duration-300 ${isOpen ? "w-72 md:w-96" : "w-0"
                 }`}
         >
             {/* Header */}
@@ -30,7 +30,7 @@ const Sidebar: React.FC = () => {
                     <CustomLink href={"settings"} content={<Gear size={25} />} />
                     {/* Toggle Button */}
                     <button
-                        className="p-2 text-light flex items-center justify-center"
+                        className="text-light flex items-center justify-center"
                         onClick={toggleSidebar}
                     >
                         {isOpen ? <CaretDoubleLeft size={20} /> : <CaretDoubleRight size={20} />}

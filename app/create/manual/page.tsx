@@ -44,7 +44,7 @@ const CreateManual: React.FC = () => {
 
     return (
         <main className="w-full flex flex-col">
-            <Navbar back />
+            <Navbar />
 
             <section className="p-[10px] h-full flex flex-col">
                 {/* Welcome message */}

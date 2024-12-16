@@ -10,7 +10,7 @@ interface NavProps {
     back?: boolean;
 }
 
-const Navbar: React.FC<NavProps> = ({ pageTitle = '', back = false }) => {
+const Navbar: React.FC<NavProps> = ({ back = false }) => {
     const [AppWindow, setAppWindow] = useState<Window>();
 
     useEffect(() => {
@@ -35,18 +35,9 @@ const Navbar: React.FC<NavProps> = ({ pageTitle = '', back = false }) => {
 
     return (
         <nav className="h-11 flex items-center p-[10px] justify-between relative" data-tauri-drag-region >
-            {/* Page Title */}
-            <section className="flex items-center justify-center gap-x-2">
-                {back && (
-                    <section className="z-10 text-light h-min">
-                        <CustomLink back content={<ArrowLeft size={20} />} />
-                    </section>
-                )}
-                <h1 className="font-bold text-main mt-20">
-                    {pageTitle}
-                </h1>
-            </section>
+            <section>
 
+            </section>
 
             {/* Window Control */}
             <section className="flex items-center gap-x-2 z-10">

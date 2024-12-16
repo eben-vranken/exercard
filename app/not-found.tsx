@@ -3,7 +3,7 @@ import Navbar from "@/components/UI/functional/Navbar";
 const Page: React.FC = () => {
     return (
         <section className="w-full">
-            <Navbar back pageTitle="404" />
+            <Navbar />
 
             <section className="p-[10px] h-full flex flex-col">
                 {/* Welcome message */}
