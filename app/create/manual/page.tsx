@@ -55,7 +55,7 @@ const CreateManual: React.FC = () => {
                     </p>
                 </section>
 
-                <form className="h-full w-full flex flex-col gap-y-2 items-center justify-center" onSubmit={handleSubmit}>
+                <form className="h-full w-full flex flex-col gap-y-2 items-center justify-center" autoComplete="off" onSubmit={handleSubmit}>
                     <section className="flex flex-col w-full md:w-2/3 gap-y-1">
                         <section>
                             <span className="text-sm text-light">Deck name</span>
@@ -63,7 +63,7 @@ const CreateManual: React.FC = () => {
                                 &nbsp;*
                             </span>
                         </section>
-                        <input className="styled-input" name="name" value={deckData.name} onChange={handleChange} required></input>
+                        <input type="text" className="styled-input" name="name" value={deckData.name} onChange={handleChange} required ></input>
                     </section>
 
                     <section className="flex flex-col w-full md:w-2/3 gap-y-1">

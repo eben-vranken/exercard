@@ -71,7 +71,7 @@ const EditDeckForm: React.FC = () => {
             </section>
 
             {/* Deck Content */}
-            <form className="h-full w-full flex flex-col gap-y-2 items-center justify-center" onSubmit={handleSubmit}>
+            <form className="h-full w-full flex flex-col gap-y-2 items-center justify-center" autoComplete="off" onSubmit={handleSubmit}>
                 <section className="flex flex-col w-full md:w-2/3 gap-y-1">
                     <section>
                         <span className="text-sm text-light">Deck name</span>
