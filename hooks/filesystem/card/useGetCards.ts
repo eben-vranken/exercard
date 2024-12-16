@@ -26,8 +26,8 @@ const useGetCards = async (deckId: number): Promise<UseGetCardsResponse> => {
                 back TEXT NOT NULL,
                 hint TEXT,
                 due_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (deck_id) REFERENCES decks(id)
-            )
+                FOREIGN KEY (deck_id) REFERENCES decks (id) ON DELETE CASCADE
+            );
         `);
 
         const result = await db.select(

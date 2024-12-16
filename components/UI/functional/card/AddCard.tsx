@@ -164,7 +164,7 @@ const AddCardComponent: React.FC = () => {
                 {cards ? <section className="flex flex-col gap-y-2 ">
                     {cards.map((card, id) => {
                         return (
-                            <section className="flex flex-col border border-white/10 rounded p-1">
+                            <section key={id} className="flex flex-col border border-white/10 rounded p-1">
                                 <span className="text-light">
                                     {card.front}
                                 </span>
