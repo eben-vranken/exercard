@@ -1,11 +1,14 @@
 'use client';
 
 import useCreateCard from "@/hooks/filesystem/card/useCreateCard";
+import useDeleteCard from "@/hooks/filesystem/card/useDeleteCard";
 import useGetCards from "@/hooks/filesystem/card/useGetCards";
+import { Trash } from "@phosphor-icons/react/dist/ssr";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 interface Card {
+    id: Number;
     deckId: number;
     front: string;
     back: string;
@@ -17,22 +20,24 @@ const AddCardComponent: React.FC = () => {
     const deckId = searchParams.get('deckId') || '';
     const [cards, setCards] = useState<Card[] | null>(null);
 
-    // Get cards of deck once deck is fetched
-    useEffect(() => {
-        const fetchCards = async () => {
-            if (deckId) {
-                const results = await useGetCards(Number(deckId))
-                if (results.status === 'ok' && results.data) {
-                    setCards(results.data);
-                } else {
-                    console.error(`Error fetching deck: ${results.message}`);
-                }
+    const fetchCards = async () => {
+        if (deckId) {
+            const results = await useGetCards(Number(deckId))
+            if (results.status === 'ok' && results.data) {
+                setCards(results.data);
+            } else {
+                console.error(`Error fetching deck: ${results.message}`);
             }
         }
+    }
+
+    // Get cards of deck once deck is fetched
+    useEffect(() => {
         fetchCards();
     }, [deckId])
 
     const [newCardData, setNewCardData] = useState<Card>({
+        id: Number(null),
         deckId: Number(deckId),
         front: '',
         back: '',
@@ -68,6 +73,7 @@ const AddCardComponent: React.FC = () => {
 
             if (result.status == "ok") {
                 setNewCardData({
+                    id: Number(null),
                     deckId: Number(deckId),
                     front: '',
                     back: '',
@@ -88,6 +94,20 @@ const AddCardComponent: React.FC = () => {
             console.error('Unexpected error when creating card: ', err)
         }
     }
+
+    const handleDelete = async (cardId: Number) => {
+        const result = await useDeleteCard(cardId);
+
+        console.log(result)
+        if (result.status === "ok") {
+            console.log("Card Deleted")
+            fetchCards()
+        }
+        else {
+            console.log("Deletion cancelled.");
+        }
+    }
+
 
     return (
         <section className="h-full w-full flex overflow-hidden justify-between">
@@ -164,13 +184,17 @@ const AddCardComponent: React.FC = () => {
                 {cards?.length ? <section className="flex flex-col gap-y-2 ">
                     {cards.map((card, id) => {
                         return (
-                            <section key={id} className="flex flex-col border border-white/10 rounded p-1">
-                                <span className="text-light">
-                                    {card.front}
-                                </span>
-                                <span className="text-ultralight">
-                                    {card.back}
-                                </span>
+                            <section key={id} className="flex justify-between items-center border border-white/10 rounded p-1">
+                                <section className="flex flex-col">
+                                    <span className="text-light">
+                                        {card.front}
+                                    </span>
+                                    <span className="text-ultralight">
+                                        {card.back}
+                                    </span>
+                                </section>
+
+                                <Trash size={25} className="text-light hover:text-ultralight cursor-pointer" onClick={() => handleDelete(card.id)} />
                             </section>
                         )
                     })}

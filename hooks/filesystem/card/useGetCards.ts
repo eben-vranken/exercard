@@ -1,6 +1,7 @@
 import Database from "@tauri-apps/plugin-sql";
 
 interface Card {
+    id: Number;
     deckId: number;
     front: string;
     back: string;
