@@ -33,5 +33,12 @@
     "icon": [
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "sql": {
+      "preload": [
+        "sqlite:decks.db"
+      ]
+    }
   }
 }

@@ -61,7 +61,7 @@ function DeckContent() {
                 if (results.status === 'ok' && results.data) {
                     setCards(results.data);
                 } else {
-                    console.error(`Error fetching deck: ${results.message}`);
+                    console.error(`Error fetching cards: ${results.message}`);
                 }
             }
         }

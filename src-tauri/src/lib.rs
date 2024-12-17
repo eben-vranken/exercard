@@ -12,6 +12,22 @@ pub fn run() {
                 description TEXT
         )",
         kind: MigrationKind::Up,
+        },
+        Migration {
+            version: 2,
+            description: "create cards table",
+            sql: "CREATE TABLE IF NOT EXISTS cards (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                deck_id INTEGER NOT NULL,
+                front TEXT NOT NULL,
+                back TEXT NOT NULL,
+                stability REAL DEFAULT 1.0,
+                retrievability REAL DEFAULT 1.0,
+                difficulty REAL DEFAULT 0.0,
+                next_review INTEGER NOT NULL,
+                FOREIGN KEY(deck_id) REFERENCES decks(id)
+            )",
+            kind: MigrationKind::Up,
         }
     ];
 
