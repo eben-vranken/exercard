@@ -19,7 +19,7 @@ const useGetCards = async (deckId: number): Promise<UseGetCardsResponse> => {
         const db = await Database.load("sqlite:decks.db");
 
         const result = await db.select(
-            "SELECT * FROM cards WHERE deck_id = $1 ORDER BY due_date ASC",
+            "SELECT * FROM cards WHERE deck_id = $1 ORDER BY next_review ASC",
             [deckId]
         );
 
