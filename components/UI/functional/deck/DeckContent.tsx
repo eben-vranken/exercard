@@ -176,12 +176,16 @@ function DeckContent() {
                                         }
                                     </section>
 
+
                                     {/* Activities */}
-                                    <section className="h-[100px] w-full md:w-2/3 flex flex-col md:flex-row gap-x-1 text-light">
-                                        <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Quiz Me</section>
-                                        <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Let's Talk</section>
-                                        <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Explain It</section>
-                                    </section>
+                                    {
+                                        dueCards && dueCards?.length < 0 &&
+                                        <section className="h-[100px] w-full md:w-2/3 flex flex-col md:flex-row gap-x-1 text-light">
+                                            <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Quiz Me</section>
+                                            <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Let's Talk</section>
+                                            <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Explain It</section>
+                                        </section>
+                                    }
                                 </section>
                             </section>
                         </section>
