@@ -5,6 +5,9 @@ interface Card {
     deckId: number;
     front: string;
     back: string;
+    retrievability: number;
+    stability: number;
+    difficulty: number;
 }
 
 interface UseGetCardsResponse {

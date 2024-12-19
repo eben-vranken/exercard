@@ -4,12 +4,13 @@ import Navbar from "@/components/UI/functional/Navbar";
 import useGetSpecificDeck from "@/hooks/filesystem/deck/useGetSpecificDeck";
 import { Pencil, Plus, Trash } from "@phosphor-icons/react/dist/ssr";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ConfirmModal from "../ConfirmModal";
 import useDeleteDeck from "@/hooks/filesystem/deck/useDeleteDeck";
 import useGetCards from "@/hooks/filesystem/card/useGetCards";
 import Link from "next/link";
 import useGetDueCards from "@/hooks/filesystem/card/useGetDueCards";
+import CardReview from "./deckQuiz";
 
 interface Deck {
     id: number;
@@ -18,11 +19,14 @@ interface Deck {
 }
 
 interface Card {
+    id: Number;
     deckId: number;
     front: string;
     back: string;
+    retrievability: number;
+    stability: number;
+    difficulty: number;
 }
-
 
 function DeckContent() {
     const router = useRouter()
@@ -67,24 +71,8 @@ function DeckContent() {
                 }
             }
         }
-
-        // Get due cards
-        const fetchDueCards = async () => {
-            if (deck) {
-                const results = await useGetDueCards(deck.id)
-                if (results.status === 'ok' && results.data) {
-                    setDueCards(results.data);
-                } else {
-                    console.error(`Error fetching cards: ${results.message}`);
-                }
-            }
-
-        }
         fetchCards();
-    }, [deck])
 
-    useEffect(() => {
-        // Get due cards
         const fetchDueCards = async () => {
             if (deck) {
                 const results = await useGetDueCards(deck.id)
@@ -141,7 +129,8 @@ function DeckContent() {
                                 />
                             }
 
-                            <section className="flex flex-col justify-between w-full mb-2">
+                            <section className="flex flex-col justify-between w-full gap-y-10">
+                                {/* Deck navbar */}
                                 <section className="flex items-center justify-between ">
                                     <section className="flex flex-col">
                                         <h2 className="text-responsive-md font-semibold line-clamp-1">{deck.name}</h2>
@@ -174,12 +163,16 @@ function DeckContent() {
                                     {/* Cards */}
                                     <section className="h-full flex items-center justify-center">
                                         {
-                                            cards?.length > 0 ?
-                                                <section>
-
-                                                </section>
+                                            (cards.length > 0) ?
+                                                (
+                                                    dueCards && dueCards?.length > 0 ?
+                                                        // Cards to review
+                                                        <CardReview cards={dueCards} />
+                                                        :
+                                                        <span className="text-light">No cards due!</span>
+                                                )
                                                 :
-                                                <span className="text-light">No cards yet!</span>
+                                                <span className="text-light">Deck doesn't have cards yet!</span>
                                         }
                                     </section>
 
