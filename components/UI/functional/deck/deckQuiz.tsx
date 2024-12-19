@@ -43,8 +43,8 @@ const CardReview: React.FC<ReviewProps> = ({ cards }) => {
             </section>
 
             {/* Actions */}
-            <section className="">
-                <section className="flex gap-x-2">
+            <section>
+                <section className="flex gap-x-2 font-semibold">
                     <button className="flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-red-500/75 opacity-50">
                         <span className="text-light">0.</span>
                         Again
