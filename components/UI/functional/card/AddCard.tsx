@@ -3,7 +3,7 @@
 import useCreateCard from "@/hooks/filesystem/card/useCreateCard";
 import useDeleteCard from "@/hooks/filesystem/card/useDeleteCard";
 import useGetCards from "@/hooks/filesystem/card/useGetCards";
-import { Trash } from "@phosphor-icons/react/dist/ssr";
+import { Pencil, Trash } from "@phosphor-icons/react/dist/ssr";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -174,12 +174,16 @@ const AddCardComponent: React.FC = () => {
                     <section className="flex flex-col-reverse gap-y-2">
                         {cards.map((card, id) => (
                             <section key={id} className={`flex justify-between items-center border border-white/10 rounded p-1 card-entry`}>
-                                <section className="flex flex-col">
-                                    <span className="text-light">{card.front}</span>
-                                    <span className="text-ultralight">{card.back}</span>
+                                <section className="flex flex-col w-3/4 ">
+                                    <span className="text-light line-clamp-2">{card.front}</span>
+                                    <span className="text-ultralight line-clamp-2">{card.back}</span>
                                 </section>
 
-                                <Trash size={25} className="text-light hover:text-ultralight cursor-pointer" onClick={() => handleDelete(card.id)} />
+
+                                <section className="flex flex-col gap-y-3">
+                                    <Pencil size={25} className="text-light hover:text-ultralight cursor-pointer" />
+                                    <Trash size={25} className="text-light hover:text-ultralight cursor-pointer" onClick={() => handleDelete(card.id)} />
+                                </section>
                             </section>
                         ))}
                     </section>
