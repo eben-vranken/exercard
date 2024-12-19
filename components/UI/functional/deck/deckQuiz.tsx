@@ -28,7 +28,7 @@ const CardReview: React.FC<ReviewProps> = ({ cards }) => {
                 </h1>
 
                 {/* Current card */}
-                <section className="border border-white/5 rounded aspect-video w-3/5 flex justify-center items-center p-20 overflow-hidden text-2xl text-center">
+                <section className="border border-white/5 rounded aspect-video w-3/5 flex justify-center items-center px-5 overflow-hidden lg:text-lg xl:text-2xl text-center">
                     <h1>
                         {
                             cards[0].front
