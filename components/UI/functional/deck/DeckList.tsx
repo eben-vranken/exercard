@@ -47,7 +47,7 @@ const DeckList: React.FC = () => {
     )
 
     return (
-        <section className="flex flex-col gap-y-2 text-light" >
+        <section className="flex flex-col gap-y-2 text-light line-clamp-2" >
             {userDecks?.length > 0 ? <section>
                 {
                     userDecks.map((deck, id) => {
