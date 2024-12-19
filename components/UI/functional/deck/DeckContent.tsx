@@ -161,7 +161,7 @@ function DeckContent() {
                                 {/* Main deck */}
                                 <section className="flex flex-col items-center w-full h-full">
                                     {/* Cards */}
-                                    <section className="h-full flex items-center justify-center">
+                                    <section className="h-full w-full flex items-center justify-center">
                                         {
                                             (cards.length > 0) ?
                                                 (
