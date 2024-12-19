@@ -14,8 +14,8 @@ interface ReviewProps {
 
 const CardReview: React.FC<ReviewProps> = ({ cards }) => {
     return (
-        <section className="w-full h-full flex flex-col items-center justify-between p-5">
-            <span>&nbsp;</span>
+        <section className="w-full h-full flex flex-col items-center justify-around p-5">
+
 
             {/* Cards */}
             <section className="w-full flex flex-col items-center justify-center relative">
