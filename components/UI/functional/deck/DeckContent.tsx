@@ -129,14 +129,14 @@ function DeckContent() {
                                     </section>
 
                                     {/* Deck options */}
-                                    <section className="flex gap-x-2 opacity-75">
-                                        <Link href={`/add-cards?deckId=${deck.id}`} className="gap-x-2 bg-[#7FB069] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => createCards()}>
+                                    <section className="flex gap-x-4 opacity-75">
+                                        <Link href={`/add-cards?deckId=${deck.id}`} className="cursor-pointer hover:opacity-75" onClick={() => createCards()}>
                                             <Plus size={25} />
                                         </Link>
-                                        <Link href={`/edit-deck?deckId=${deck.id}`} className="gap-x-2 bg-[#F4AC45] rounded py-1 px-2 cursor-pointer hover:opacity-75">
+                                        <Link href={`/edit-deck?deckId=${deck.id}`} className="cursor-pointer hover:opacity-75">
                                             <Pencil size={25} />
                                         </Link>
-                                        <section className="gap-x-2 bg-[#D1462F] rounded py-1 px-2 cursor-pointer hover:opacity-75" onClick={() => handleDeleteDeck()}>
+                                        <section className="cursor-pointer hover:opacity-75" onClick={() => handleDeleteDeck()}>
                                             <Trash size={25} />
                                         </section>
                                     </section>
