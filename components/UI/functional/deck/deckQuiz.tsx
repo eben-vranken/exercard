@@ -15,16 +15,18 @@ interface ReviewProps {
 const CardReview: React.FC<ReviewProps> = ({ cards }) => {
     return (
         <section className="w-full h-full flex flex-col items-center justify-between p-5">
-            <h1 className="font-semibold text-light text-center ">
-                <span className="text-green-500 opacity-50">
-                    {cards.length}
-                </span>
-                &nbsp;
-                cards for review
-            </h1>
+            <span>&nbsp;</span>
 
             {/* Cards */}
             <section className="w-full flex flex-col items-center justify-center relative">
+                <h1 className="font-semibold text-light text-center mb-3">
+                    <span className="text-green-500 opacity-50">
+                        {cards.length}
+                    </span>
+                    &nbsp;
+                    cards for review
+                </h1>
+
                 {/* Current card */}
                 <section className="border border-white/5 rounded aspect-video w-3/5 flex justify-center items-center p-20 overflow-hidden text-2xl text-center">
                     <h1>
