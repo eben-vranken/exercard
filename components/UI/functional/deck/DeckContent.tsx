@@ -9,6 +9,7 @@ import ConfirmModal from "../ConfirmModal";
 import useDeleteDeck from "@/hooks/filesystem/deck/useDeleteDeck";
 import useGetCards from "@/hooks/filesystem/card/useGetCards";
 import Link from "next/link";
+import useGetDueCards from "@/hooks/filesystem/card/useGetDueCards";
 
 interface Deck {
     id: number;
@@ -20,7 +21,6 @@ interface Card {
     deckId: number;
     front: string;
     back: string;
-    hint?: string;
 }
 
 
@@ -31,6 +31,7 @@ function DeckContent() {
 
     const [deck, setDeck] = useState<Deck | null>(null);
     const [cards, setCards] = useState<Card[] | null>(null);
+    const [dueCards, setDueCards] = useState<Card[] | null>(null);
 
     // Deck states
     const [isDeleting, setIsDeleting] = useState<{
@@ -55,6 +56,7 @@ function DeckContent() {
 
     // Get cards of deck once deck is fetched
     useEffect(() => {
+        // Get all cards
         const fetchCards = async () => {
             if (deck) {
                 const results = await useGetCards(deck.id)
@@ -65,13 +67,37 @@ function DeckContent() {
                 }
             }
         }
+
+        // Get due cards
+        const fetchDueCards = async () => {
+            if (deck) {
+                const results = await useGetDueCards(deck.id)
+                if (results.status === 'ok' && results.data) {
+                    setDueCards(results.data);
+                } else {
+                    console.error(`Error fetching cards: ${results.message}`);
+                }
+            }
+
+        }
         fetchCards();
     }, [deck])
 
-    // Create cards
-    const createCards = () => {
+    useEffect(() => {
+        // Get due cards
+        const fetchDueCards = async () => {
+            if (deck) {
+                const results = await useGetDueCards(deck.id)
+                if (results.status === 'ok' && results.data) {
+                    setDueCards(results.data);
+                } else {
+                    console.error(`Error fetching cards: ${results.message}`);
+                }
+            }
 
-    }
+        }
+        fetchDueCards();
+    }, [deck])
 
     // Delete deck
     const handleDeleteDeck = async () => {
@@ -130,7 +156,7 @@ function DeckContent() {
 
                                     {/* Deck options */}
                                     <section className="flex gap-x-4 opacity-75">
-                                        <Link href={`/add-cards?deckId=${deck.id}`} className="cursor-pointer hover:opacity-75" onClick={() => createCards()}>
+                                        <Link href={`/add-cards?deckId=${deck.id}`} className="cursor-pointer hover:opacity-75">
                                             <Plus size={25} />
                                         </Link>
                                         <Link href={`/edit-deck?deckId=${deck.id}`} className="cursor-pointer hover:opacity-75">

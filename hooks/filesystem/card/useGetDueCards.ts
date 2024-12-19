@@ -13,14 +13,17 @@ interface UseGetCardsResponse {
     message?: string;
 }
 
-const useGetCards = async (deckId: number): Promise<UseGetCardsResponse> => {
+const useGetDueCards = async (deckId: number): Promise<UseGetCardsResponse> => {
     try {
         const db = await Database.load("sqlite:decks.db");
 
         const result = await db.select(
-            "SELECT * FROM cards WHERE deck_id = $1 ORDER BY next_review ASC",
-            [deckId]
+            "SELECT * FROM cards WHERE deck_id = $1 AND next_review < $2 ORDER BY next_review ASC",
+            [deckId, Date.now()]
         );
+
+
+        console.log(result)
 
         return {
             status: 'ok',
@@ -34,4 +37,4 @@ const useGetCards = async (deckId: number): Promise<UseGetCardsResponse> => {
     }
 };
 
-export default useGetCards;
+export default useGetDueCards;

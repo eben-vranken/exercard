@@ -25,7 +25,6 @@ const DeckList: React.FC = () => {
     }
 
     const startWatcher = async () => {
-        console.log('started watcher')
         await watch(
             '',
             () => {
