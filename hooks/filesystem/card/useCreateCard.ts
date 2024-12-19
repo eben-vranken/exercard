@@ -12,12 +12,11 @@ const useCreateCard = async (card: Card): Promise<{ status: string, message: str
         const db = await Database.load("sqlite:decks.db");
 
         await db.execute(
-            "INSERT INTO cards (deck_id, front, back, hint, stability, retrievability, difficulty, next_review) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+            "INSERT INTO cards (deck_id, front, back, stability, retrievability, difficulty, next_review) VALUES ($1, $2, $3, $4, $5, $6, $7)",
             [
                 card.deckId,
                 card.front,
                 card.back,
-                card.hint || null,
                 1.0,     // stability
                 1.0,     // retrievability
                 0.0,     // difficulty
