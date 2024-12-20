@@ -10,7 +10,6 @@ import useDeleteDeck from "@/hooks/filesystem/deck/useDeleteDeck";
 import useGetCards from "@/hooks/filesystem/card/useGetCards";
 import Link from "next/link";
 import useGetDueCards from "@/hooks/filesystem/card/useGetDueCards";
-import CardReview from "./deckQuiz";
 
 interface Deck {
     id: number;
@@ -111,10 +110,11 @@ function DeckContent() {
             setIsDeleting({ isVisible: true, resolve });
         });
     };
+
     return (
-        <main className="w-full flex flex-col relative">
+        <main className="w-full h-full flex flex-col relative">
             <Navbar />
-            <section className="p-[10px] h-full flex flex-col">
+            <section className="p-[10px] w-full h-full flex flex-col">
                 {
                     deck && cards ?
                         <section className="flex gap-2 h-full">
@@ -167,7 +167,12 @@ function DeckContent() {
                                                 (
                                                     dueCards && dueCards?.length > 0 ?
                                                         // Cards to review
-                                                        <CardReview cards={dueCards} />
+                                                        <Link href={`/review?deckId=${deck.id}`}>
+                                                            <section className="flex flex-col items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer p-3">
+                                                                <h2 className="text-light">Review Cards</h2>
+                                                                <span className="text-ultralight text-sm">You have {dueCards.length} cards due!</span>
+                                                            </section>
+                                                        </Link>
                                                         :
                                                         <span className="text-light">No cards due!</span>
                                                 )
@@ -179,7 +184,6 @@ function DeckContent() {
 
                                     {/* Activities */}
                                     {
-                                        dueCards && dueCards?.length < 0 &&
                                         <section className="h-[100px] w-full md:w-2/3 flex flex-col md:flex-row gap-x-1 text-light">
                                             <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Quiz Me</section>
                                             <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Let's Talk</section>
@@ -190,9 +194,9 @@ function DeckContent() {
                             </section>
                         </section>
                         :
-                        <section>
+                        <span className="text-light">
                             Loading...
-                        </section>
+                        </span>
                 }
             </section>
         </main >
