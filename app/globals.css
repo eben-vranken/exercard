@@ -17,9 +17,7 @@ body {
   font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
-/*                 */
 /* Custom Elements */
-/*                 */
 .styled-input {
   border-radius: 2px;
   padding: 5px 10px;
@@ -74,4 +72,106 @@ body {
 /* Smooth transition for the card list container */
 .card-list {
   transition: transform 0.3s ease-out;
+}
+@keyframes textFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.text-fadein {
+  animation: textFadeIn 0.25s ease-in forwards;
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(50%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50%) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes moveTopLeft {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes moveTopRight {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(50%, -50%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+.answered-0 {
+  animation: moveLeft 0.5s ease-in-out forwards;
+}
+
+.answered-1 {
+  animation: moveTopLeft 0.5s ease-in-out forwards;
+}
+
+.answered-2 {
+  animation: moveUp 0.5s ease-in-out forwards;
+}
+
+.answered-3 {
+  animation: moveTopRight 0.5s ease-in-out forwards;
+}
+
+.answered-4 {
+  animation: moveRight 0.5s ease-in-out forwards;
 }

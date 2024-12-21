@@ -20,7 +20,9 @@ const CardReview: React.FC = () => {
     const searchParams = useSearchParams();
     const deckId = searchParams.get('deckId') || '';
 
+    const [flipped, setFlipped] = useState<boolean>(false);
     const [answered, setAnswered] = useState<boolean>(false);
+    const [answeredAnimation, setAnsweredAnimation] = useState<string>('');
     const [cards, setCards] = useState<Card[]>([]);
 
     useEffect(() => {
@@ -41,13 +43,8 @@ const CardReview: React.FC = () => {
             const result = await useReviewCard(grade);
 
             if (result.status === 'ok') {
-                console.log("Card reviewed successfully");
-                setAnswered(false);
-                cards.shift();
-
-                if (cards.length === 0) {
-                    router.back();
-                }
+                setAnswered(true);
+                setAnsweredAnimation(`answered-${grade}`);
             }
 
         } catch (err) {
@@ -55,10 +52,33 @@ const CardReview: React.FC = () => {
         }
     };
 
+    let navigationTriggered = false;
+
+    const handleAnimationEnd = () => {
+        if (answered) {
+            setCards(prevCards => {
+                const newCards = [...prevCards];
+                newCards.shift();
+
+                if (newCards.length === 0 && !navigationTriggered) {
+                    navigationTriggered = true; // Prevent multiple navigations
+                    router.back();
+                }
+
+                return newCards;
+            });
+
+            setAnsweredAnimation("");
+            setAnswered(false);
+            setFlipped(false);
+        }
+    };
+
+
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.code === "Space") {
-                setAnswered(true);
+                setFlipped(true);
             }
 
             const keyActions: { [key: string]: string } = {
@@ -69,7 +89,7 @@ const CardReview: React.FC = () => {
                 Digit5: "4",
             };
 
-            if (keyActions[event.code] && answered) {
+            if (keyActions[event.code] && flipped) {
                 handleReview(keyActions[event.code]);
             }
         };
@@ -79,7 +99,7 @@ const CardReview: React.FC = () => {
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [answered]);
+    }, [flipped]);
 
     const handleButtonClick = (grade: string, event: React.MouseEvent<HTMLButtonElement>) => {
         handleReview(grade);
@@ -102,10 +122,16 @@ const CardReview: React.FC = () => {
                         </h1>
 
                         {/* Current card */}
-                        <section className="border border-white/5 rounded aspect-video w-3/5 flex justify-center items-center px-5 overflow-hidden lg:text-lg xl:text-2xl text-center">
+                        <section className={`${answeredAnimation} border border-white/5 rounded aspect-video w-3/5 flex flex-col gap-y-3 justify-center items-center px-5 overflow-hidden lg:text-lg xl:text-2xl text-center`} onAnimationEnd={answered ? handleAnimationEnd : undefined}>
                             <h1>
                                 {
-                                    answered ? cards[0].back : cards[0].front
+                                    cards[0].front
+                                }
+                            </h1>
+
+                            <h1 className={`text-light ${flipped ? "text-fadein" : "opacity-0"}`}>
+                                {
+                                    cards[0].back
                                 }
                             </h1>
                         </section>
@@ -117,7 +143,7 @@ const CardReview: React.FC = () => {
                     </section>
 
                     {/* Actions */}
-                    <section className={`flex gap-x-2 font-semibold ${answered ? "" : "opacity-0 pointer-events-none"}`}>
+                    <section className={`flex gap-x-2 font-semibold ${flipped ? "" : "opacity-0 pointer-events-none"}`}>
                         <button onClick={(e) => handleButtonClick("0", e)} className="flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-red-500/75 opacity-50">
                             <span className="text-light">1.</span>
                             Again
