@@ -29,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === ' ' || event.keyCode === 32) {
-      event.preventDefault();  // Prevent the spacebar from triggering any button press
+    if (event.key === ' ') {
+      event.preventDefault();
     }
   };
 
