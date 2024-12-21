@@ -62,11 +62,11 @@ const CardReview: React.FC = () => {
             }
 
             const keyActions: { [key: string]: string } = {
-                Digit0: "0",
-                Digit1: "1",
-                Digit2: "2",
-                Digit3: "3",
-                Digit4: "4",
+                Digit1: "0",
+                Digit2: "1",
+                Digit3: "2",
+                Digit4: "3",
+                Digit5: "4",
             };
 
             if (keyActions[event.code] && answered) {
@@ -119,23 +119,23 @@ const CardReview: React.FC = () => {
                     {/* Actions */}
                     <section className={`flex gap-x-2 font-semibold ${answered ? "" : "opacity-0 pointer-events-none"}`}>
                         <button onClick={(e) => handleButtonClick("0", e)} className="flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-red-500/75 opacity-50">
-                            <span className="text-light">0.</span>
+                            <span className="text-light">1.</span>
                             Again
                         </button>
                         <button onClick={(e) => handleButtonClick("1", e)} className="flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-orange-500/75 opacity-50">
-                            <span className="text-light">1.</span>
+                            <span className="text-light">2.</span>
                             Hard
                         </button>
                         <button onClick={(e) => handleButtonClick("2", e)} className="flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-yellow-500/75 opacity-50">
-                            <span className="text-light">2.</span>
+                            <span className="text-light">3.</span>
                             Normal
                         </button>
                         <button onClick={(e) => handleButtonClick("3", e)} className="flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-green-500/75 opacity-50">
-                            <span className="text-light">3.</span>
+                            <span className="text-light">4.</span>
                             Easy
                         </button>
                         <button onClick={(e) => handleButtonClick("4", e)} className="flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-blue-500/75 opacity-50">
-                            <span className="text-light">4.</span>
+                            <span className="text-light">5.</span>
                             Perfect
                         </button>
                     </section>
