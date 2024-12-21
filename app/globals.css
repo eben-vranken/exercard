@@ -86,72 +86,72 @@ body {
   animation: textFadeIn 0.25s ease-in forwards;
 }
 
+@keyframes slideFromStack {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.card-entry {
+  animation: slideFromStack 0.3s ease-out forwards;
+}
+
 @keyframes moveLeft {
   0% {
-    transform: translateX(0) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
+    transform: translateX(0) rotate(0deg) scale(1);
     opacity: 1;
   }
   100% {
-    transform: translateX(-50%) rotate(-45deg);
-    opacity: 0;
-  }
-}
-
-@keyframes moveRight {
-  0% {
-    transform: translateX(0) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(50%) rotate(45deg);
-    opacity: 0;
-  }
-}
-
-@keyframes moveUp {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-50%) rotate(-45deg);
+    transform: translateX(-100%) rotate(-25deg) scale(0.8);
     opacity: 0;
   }
 }
 
 @keyframes moveTopLeft {
   0% {
-    transform: translate(0, 0) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
     opacity: 1;
   }
   100% {
-    transform: translate(-50%, -50%) rotate(-45deg);
+    transform: translate(-75%, -75%) rotate(-25deg) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%) rotate(-5deg) scale(0.8);
     opacity: 0;
   }
 }
 
 @keyframes moveTopRight {
   0% {
-    transform: translate(0, 0) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
     opacity: 1;
   }
   100% {
-    transform: translate(50%, -50%) rotate(45deg);
+    transform: translate(75%, -75%) rotate(25deg) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translateX(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) rotate(25deg) scale(0.8);
     opacity: 0;
   }
 }
