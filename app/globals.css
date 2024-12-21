@@ -157,21 +157,21 @@ body {
 }
 
 .answered-0 {
-  animation: moveLeft 0.5s ease-in-out forwards;
+  animation: moveLeft 0.75s ease-in-out forwards;
 }
 
 .answered-1 {
-  animation: moveTopLeft 0.5s ease-in-out forwards;
+  animation: moveTopLeft 0.75s ease-in-out forwards;
 }
 
 .answered-2 {
-  animation: moveUp 0.5s ease-in-out forwards;
+  animation: moveUp 0.75s ease-in-out forwards;
 }
 
 .answered-3 {
-  animation: moveTopRight 0.5s ease-in-out forwards;
+  animation: moveTopRight 0.75s ease-in-out forwards;
 }
 
 .answered-4 {
-  animation: moveRight 0.5s ease-in-out forwards;
+  animation: moveRight 0.75s ease-in-out forwards;
 }
