@@ -24,7 +24,7 @@ cargo tauri dev
 
 
 
-Building manually into a executable file:
+Building manually into a executable file or installer:
 
 ```bash
 npm run tauri build
