@@ -1,6 +1,6 @@
 Exercard aims to be a free and open-source equivalent of popular flashcard applications with local AI integrations.
 
-[Read more](https://app.milanote.com/publish-preview/1ThT4u10M1lr1V) about it here
+[Find out](https://app.milanote.com/publish-preview/1ThT4u10M1lr1V) what is currently being worked on, what is planned, and more.
 
 ## Getting Started
 
