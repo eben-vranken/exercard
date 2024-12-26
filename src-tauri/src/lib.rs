@@ -21,16 +21,19 @@ pub fn run() {
                 deck_id INTEGER NOT NULL,
                 front TEXT NOT NULL,
                 back TEXT NOT NULL,
-                retrievability REAL DEFAULT 1.0,
-                stability REAL DEFAULT 1.0,
-                difficulty REAL DEFAULT 0.0,
-                grade REAL DEFAULT 0.0,
-                next_review INTEGER NOT NULL,
+                retrievability REAL DEFAULT 1.0,  -- FSRS-specific
+                stability REAL DEFAULT 1.0,      -- FSRS-specific
+                difficulty REAL DEFAULT 0.0,    -- FSRS-specific
+                repetition INTEGER DEFAULT 0,   -- SM-2-specific
+                easiness_factor REAL DEFAULT 2.5, -- SM-2-specific
+                interval INTEGER DEFAULT 1,     -- SM-2-specific
+                grade INTEGER DEFAULT 0,        -- User's last review grade
+                next_review INTEGER NOT NULL,   -- Shared by both algorithms
                 FOREIGN KEY(deck_id) REFERENCES decks(id)
             )",
             kind: MigrationKind::Up,
         }
-    ];
+        
 
   tauri::Builder::default()
         .plugin(

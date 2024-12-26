@@ -42,14 +42,13 @@ const CardReview: React.FC = () => {
     const handleReview = async (grade: string) => {
         if (isTransitioning) return;
 
-        console.log(`Card reviewed with rating: ${grade}`);
         try {
             const result = await useReviewCard(grade);
 
             if (result.status === 'ok') {
+                setIsTransitioning(true);
                 setAnswered(true);
                 setAnsweredAnimation(`answered-${grade}`);
-                setIsTransitioning(true);
                 setSelectedGrade(grade);
             }
 
