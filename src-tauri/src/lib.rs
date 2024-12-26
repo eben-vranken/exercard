@@ -33,6 +33,7 @@ pub fn run() {
             )",
             kind: MigrationKind::Up,
         }
+    ];
         
 
   tauri::Builder::default()
