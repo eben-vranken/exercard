@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import useCreateDeck from "@/hooks/filesystem/deck/useCreateDeck";
+import useCreateDeck from "@/hooks/deck/useCreateDeck";
 import { useRouter } from 'next/navigation';
 
 // Compontents

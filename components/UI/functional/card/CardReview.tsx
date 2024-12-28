@@ -1,24 +1,15 @@
 'use client'
 
-import useGetDueCards from "@/hooks/filesystem/card/useGetDueCards";
-import useReviewCard from "@/hooks/filesystem/card/useReviewCard";
+import useGetDueCards from "@/hooks/card/useGetDueCards";
+import useReviewCard from "@/hooks/card/useReviewCard";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
-
-interface Card {
-    id: Number;
-    deckId: number;
-    front: string;
-    back: string;
-    retrievability: number;
-    stability: number;
-    difficulty: number;
-}
 
 const CardReview: React.FC = () => {
     const router = useRouter()
     const searchParams = useSearchParams();
     const deckId = searchParams.get('deckId') || '';
+    const reviewAlgorithm = searchParams.get('reviewAlgorithm') || '';
 
     const [flipped, setFlipped] = useState<boolean>(false);
     const [answered, setAnswered] = useState<boolean>(false);
@@ -43,7 +34,7 @@ const CardReview: React.FC = () => {
         if (isTransitioning) return;
 
         try {
-            const result = await useReviewCard(grade);
+            const result = await useReviewCard(cards[0], Number(grade));
 
             if (result.status === 'ok') {
                 setIsTransitioning(true);

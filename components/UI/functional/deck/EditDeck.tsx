@@ -1,5 +1,5 @@
-import useEditDeck from "@/hooks/filesystem/deck/useEditDeck";
-import useGetSpecificDeck from "@/hooks/filesystem/deck/useGetSpecificDeck";
+import useEditDeck from "@/hooks/deck/useEditDeck";
+import useGetSpecificDeck from "@/hooks/deck/useGetSpecificDeck";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 

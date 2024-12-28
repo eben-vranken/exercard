@@ -1,15 +1,5 @@
 import Database from "@tauri-apps/plugin-sql";
 
-interface Card {
-    id: Number;
-    deckId: number;
-    front: string;
-    back: string;
-    retrievability: number;
-    stability: number;
-    difficulty: number;
-}
-
 interface UseGetCardsResponse {
     status: 'ok' | 'error';
     data?: Card[];

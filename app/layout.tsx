@@ -15,6 +15,21 @@ declare global {
     name: string;
     description: string;
   }
+
+  interface Card {
+    id: Number;
+    deckId: number;
+    front: string;
+    back: string;
+    retrievability: number;
+    stability: number;
+    difficulty: number;
+    repetition: number;
+    easiness_factor: number;
+    interval: number;
+    grade: number;
+    next_review: Date;
+  }
 }
 
 const inter = localFont({

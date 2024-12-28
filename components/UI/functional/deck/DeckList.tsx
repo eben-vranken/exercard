@@ -1,15 +1,9 @@
 'use client'
 
-import useGetDecks from "@/hooks/filesystem/deck/useGetDecks";
+import useGetDecks from "@/hooks/deck/useGetDecks";
 import { BaseDirectory, watch } from "@tauri-apps/plugin-fs";
 import { useEffect, useState } from "react";
 import CustomLink from "../Link";
-
-interface Deck {
-    id: number;
-    name: string;
-    description: string;
-}
 
 const DeckList: React.FC = () => {
     const [userDecks, setUserDecks] = useState<Deck[]>();

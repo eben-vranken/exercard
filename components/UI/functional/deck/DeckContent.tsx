@@ -1,31 +1,15 @@
 'use client';
 
 import Navbar from "@/components/UI/functional/Navbar";
-import useGetSpecificDeck from "@/hooks/filesystem/deck/useGetSpecificDeck";
+import useGetSpecificDeck from "@/hooks/deck/useGetSpecificDeck";
 import { Pencil, Plus, Trash } from "@phosphor-icons/react/dist/ssr";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ConfirmModal from "../ConfirmModal";
-import useDeleteDeck from "@/hooks/filesystem/deck/useDeleteDeck";
-import useGetCards from "@/hooks/filesystem/card/useGetCards";
+import useDeleteDeck from "@/hooks/deck/useDeleteDeck";
+import useGetCards from "@/hooks/card/useGetCards";
 import Link from "next/link";
-import useGetDueCards from "@/hooks/filesystem/card/useGetDueCards";
-
-interface Deck {
-    id: number;
-    name: string;
-    description: string;
-}
-
-interface Card {
-    id: Number;
-    deckId: number;
-    front: string;
-    back: string;
-    retrievability: number;
-    stability: number;
-    difficulty: number;
-}
+import useGetDueCards from "@/hooks/card/useGetDueCards";
 
 function DeckContent() {
     const router = useRouter()

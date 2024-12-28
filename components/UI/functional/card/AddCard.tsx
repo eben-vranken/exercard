@@ -1,25 +1,17 @@
 'use client';
 
-import useCreateCard from "@/hooks/filesystem/card/useCreateCard";
-import useDeleteCard from "@/hooks/filesystem/card/useDeleteCard";
-import useGetCards from "@/hooks/filesystem/card/useGetCards";
+import useCreateCard from "@/hooks/card/useCreateCard";
+import useDeleteCard from "@/hooks/card/useDeleteCard";
+import useGetCards from "@/hooks/card/useGetCards";
 import { Pencil, Trash } from "@phosphor-icons/react/dist/ssr";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-
-interface Card {
-    id: Number;
-    deckId: number;
-    front: string;
-    back: string;
-    hint?: string;
-}
 
 const AddCardComponent: React.FC = () => {
     const searchParams = useSearchParams();
     const deckId = searchParams.get('deckId') || '';
     const [cards, setCards] = useState<Card[] | null>(null);
-    const [animating, setAnimating] = useState(false);  // State for triggering animation
+    const [animating, setAnimating] = useState(false);
 
     const fetchCards = async () => {
         if (deckId) {
@@ -41,7 +33,14 @@ const AddCardComponent: React.FC = () => {
         deckId: Number(deckId),
         front: '',
         back: '',
-        hint: ''
+        retrievability: 0,
+        stability: 0,
+        difficulty: 0,
+        repetition: 0,
+        interval: 0,
+        easiness_factor: 0,
+        grade: 0,
+        next_review: new Date(),
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -49,7 +48,6 @@ const AddCardComponent: React.FC = () => {
         const fieldMap: { [key: string]: keyof Card } = {
             'front': 'front',
             'back': 'back',
-            'hint': 'hint'
         };
         const field = fieldMap[name];
         if (field) {
@@ -74,7 +72,14 @@ const AddCardComponent: React.FC = () => {
                     deckId: Number(deckId),
                     front: '',
                     back: '',
-                    hint: ''
+                    retrievability: 0,
+                    stability: 0,
+                    difficulty: 0,
+                    repetition: 0,
+                    interval: 0,
+                    easiness_factor: 0,
+                    grade: 0,
+                    next_review: new Date()
                 });
 
                 // Add animation trigger for the new card
@@ -142,18 +147,6 @@ const AddCardComponent: React.FC = () => {
                             onChange={handleChange}
                             value={newCardData.back}
                             required
-                        />
-                    </section>
-
-                    <section className="flex flex-col">
-                        <label htmlFor="hint" className="text-sm text-light">Hint</label>
-                        <input
-                            type="text"
-                            name="hint"
-                            id="hint"
-                            className="styled-input"
-                            onChange={handleChange}
-                            value={newCardData.hint}
                         />
                     </section>
 

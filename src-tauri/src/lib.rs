@@ -9,7 +9,8 @@ pub fn run() {
             sql: "CREATE TABLE IF NOT EXISTS decks (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
-                description TEXT
+                description TEXT,
+                algorithm TEXT NOT NULL DEFAULT 'sm-2',
         )",
         kind: MigrationKind::Up,
         },
@@ -28,7 +29,7 @@ pub fn run() {
                 easiness_factor REAL DEFAULT 2.5, -- SM-2-specific
                 interval INTEGER DEFAULT 1,     -- SM-2-specific
                 grade INTEGER DEFAULT 0,        -- User's last review grade
-                next_review INTEGER NOT NULL,   -- Shared by both algorithms
+                next_review DATETIME NOT NULL,  -- User's next review time
                 FOREIGN KEY(deck_id) REFERENCES decks(id)
             )",
             kind: MigrationKind::Up,
