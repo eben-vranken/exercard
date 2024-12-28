@@ -1,26 +1,16 @@
 import Database from "@tauri-apps/plugin-sql";
 
-interface Card {
-    deckId: number;
-    front: string;
-    back: string;
-    hint?: string;
-}
-
 const useCreateCard = async (card: Card): Promise<{ status: string, message: string }> => {
     try {
         const db = await Database.load("sqlite:decks.db");
 
         await db.execute(
-            "INSERT INTO cards (deck_id, front, back, stability, retrievability, difficulty, next_review) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+            "INSERT INTO cards (deck_id, front, back, next_review) VALUES ($1, $2, $3, $4)",
             [
                 card.deckId,
                 card.front,
                 card.back,
-                1.0,     // stability
-                1.0,     // retrievability
-                0.0,     // difficulty
-                Date.now() // next_review (initial review time)
+                Date.now()
             ]
         );
 

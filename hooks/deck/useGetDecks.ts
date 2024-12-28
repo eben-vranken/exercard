@@ -1,11 +1,5 @@
 import Database from "@tauri-apps/plugin-sql"
 
-interface Deck {
-    id: number;
-    name: string;
-    description: string;
-}
-
 const useGetDecks = async () => {
     try {
         const db = await Database.load('sqlite:decks.db');

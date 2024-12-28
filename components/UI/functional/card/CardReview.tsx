@@ -11,6 +11,8 @@ const CardReview: React.FC = () => {
     const deckId = searchParams.get('deckId') || '';
     const reviewAlgorithm = searchParams.get('reviewAlgorithm') || '';
 
+    console.log(reviewAlgorithm)
+
     const [flipped, setFlipped] = useState<boolean>(false);
     const [answered, setAnswered] = useState<boolean>(false);
     const [answeredAnimation, setAnsweredAnimation] = useState<string>('');
@@ -33,8 +35,10 @@ const CardReview: React.FC = () => {
     const handleReview = async (grade: string) => {
         if (isTransitioning) return;
 
+        console.log(cards[0])
+
         try {
-            const result = await useReviewCard(cards[0], Number(grade));
+            const result = await useReviewCard(cards[0], Number(grade), reviewAlgorithm);
 
             if (result.status === 'ok') {
                 setIsTransitioning(true);

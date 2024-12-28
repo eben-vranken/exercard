@@ -1,5 +1,8 @@
 use tauri_plugin_sql::{Migration, MigrationKind};
 
+mod review_algorithms;
+use review_algorithms::{review_fsrs, review_sm2};
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let migrations: Vec<Migration> = vec![
@@ -10,7 +13,7 @@ pub fn run() {
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
                 description TEXT,
-                algorithm TEXT NOT NULL DEFAULT 'sm-2'
+                algorithm TEXT NOT NULL DEFAULT 'sm2'
         )",
         kind: MigrationKind::Up,
         },
@@ -29,14 +32,13 @@ pub fn run() {
                 easiness_factor REAL DEFAULT 2.5, -- SM-2-specific
                 interval INTEGER DEFAULT 1,     -- SM-2-specific
                 grade INTEGER DEFAULT 0,        -- User's last review grade
-                next_review DATETIME NOT NULL,  -- User's next review time
+                next_review INTEGER NOT NULL,  -- User's next review time
                 FOREIGN KEY(deck_id) REFERENCES decks(id)
             )",
             kind: MigrationKind::Up,
         }
     ];
         
-
   tauri::Builder::default()
         .plugin(
             tauri_plugin_sql::Builder::default()
@@ -53,6 +55,10 @@ pub fn run() {
             Ok(())
         })
         .plugin(tauri_plugin_fs::init())
+        .invoke_handler(tauri::generate_handler![
+            review_sm2,
+            review_fsrs,
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

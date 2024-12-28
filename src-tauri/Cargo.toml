@@ -25,4 +25,4 @@ log = "0.4"
 tauri = { version = "2.1.0", features = [] }
 tauri-plugin-log = "2.0.0-rc"
 tauri-plugin-sql = { version = "2", features = ["sqlite"] }
-rs-fsrs = "1.2.1"
+chrono = "0.4"

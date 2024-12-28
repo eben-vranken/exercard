@@ -112,8 +112,8 @@ checksum = "c1fd03a028ef38ba2276dce7e33fcd6369c158a1bca17946c4b1b701891c1ff7"
 name = "app"
 version = "0.1.0"
 dependencies = [
+ "chrono",
  "log",
- "rs-fsrs",
  "serde",
  "serde_json",
  "tauri",
@@ -3301,15 +3301,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 1.0.109",
-]
-
-[[package]]
-name = "rs-fsrs"
-version = "1.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "65a7e7d53c16e720833aa109509f46d4d6cc0c4c820f95b865df72c6118e9124"
-dependencies = [
- "chrono",
 ]
 
 [[package]]

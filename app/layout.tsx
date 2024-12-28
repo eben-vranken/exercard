@@ -14,6 +14,7 @@ declare global {
     id: number;
     name: string;
     description: string;
+    algorithm: string;
   }
 
   interface Card {
@@ -43,19 +44,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === ' ') {
-      event.preventDefault();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
 
   return (
     <html lang="en">

@@ -78,7 +78,6 @@ function DeckContent() {
             if (deck) {
                 const result = await useDeleteDeck(deck);
 
-                console.log(result)
                 if (result.status === "ok") {
                     console.log("Deck deleted!");
                     router.push('/')
@@ -151,7 +150,7 @@ function DeckContent() {
                                                 (
                                                     dueCards && dueCards?.length > 0 ?
                                                         // Cards to review
-                                                        <Link href={`/review?deckId=${deck.id}`}>
+                                                        <Link href={`/review?deckId=${deck.id}&reviewAlgorithm=${deck.algorithm}`} className="cursor-pointer">
                                                             <section className="flex flex-col items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer p-3">
                                                                 <h2 className="text-light">Review Cards</h2>
                                                                 <span className="text-ultralight text-sm">You have {dueCards.length} cards due!</span>
