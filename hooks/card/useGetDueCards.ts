@@ -10,10 +10,6 @@ const useGetDueCards = async (deckId: number): Promise<UseGetCardsResponse> => {
     try {
         const db = await Database.load("sqlite:decks.db");
 
-        const todayStart = new Date();
-        todayStart.setHours(0, 0, 0, 0);
-        const todayStartTimestamp = todayStart.getTime();
-
         const todayEnd = new Date();
         todayEnd.setHours(23, 59, 59, 999);
         const todayEndTimestamp = todayEnd.getTime();
@@ -23,10 +19,11 @@ const useGetDueCards = async (deckId: number): Promise<UseGetCardsResponse> => {
                 *
             FROM cards 
             WHERE deck_id = $1 
-            AND next_review BETWEEN $2 AND $3
+            AND next_review <= $2
             ORDER BY next_review ASC`,
-            [deckId, todayStartTimestamp, todayEndTimestamp]
+            [deckId, todayEndTimestamp]
         );
+
         return {
             status: 'ok',
             data: result as Card[],
