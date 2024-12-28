@@ -10,7 +10,7 @@ pub fn run() {
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
                 description TEXT,
-                algorithm TEXT NOT NULL DEFAULT 'sm-2',
+                algorithm TEXT NOT NULL DEFAULT 'sm-2'
         )",
         kind: MigrationKind::Up,
         },
