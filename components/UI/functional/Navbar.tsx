@@ -1,8 +1,6 @@
 'use client';
 
-import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 import React, { useCallback, useEffect, useState } from "react";
-import CustomLink from "./Link";
 import { Window } from "@tauri-apps/api/window";
 
 interface NavProps {
