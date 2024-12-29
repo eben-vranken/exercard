@@ -5,6 +5,8 @@ import useReviewCard from "@/hooks/card/useReviewCard";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Toast from "../Toast";
+import PostReviewAnalytics from "./PostReviewAnalytics";
+import Link from "next/link";
 
 const formatNextReview = (nextReview: number | null) => {
     if (!nextReview) return '';
@@ -26,7 +28,6 @@ const formatNextReview = (nextReview: number | null) => {
     }
 };
 
-
 const CardReview: React.FC = () => {
     const router = useRouter()
     const searchParams = useSearchParams();
@@ -41,6 +42,8 @@ const CardReview: React.FC = () => {
     const [selectedGrade, setSelectedGrade] = useState<number | null>(null);
     const [nextReview, setNextReview] = useState<number | null>(null);
     const [showToast, setShowToast] = useState<boolean>(false);
+    const [showPostReviewAnalytics, setShowPostReviewAnalytics] = useState<boolean>(false);
+    const [reviews, setReviews] = useState<{ [key: number]: number }>({});
 
     useEffect(() => {
         const fetchDueCards = async () => {
@@ -68,13 +71,16 @@ const CardReview: React.FC = () => {
                 setAnsweredAnimation(`answered-${grade}`);
                 setSelectedGrade(grade);
                 setNextReview(result.next_review);
+
+                setReviews(prevReviews => ({
+                    ...prevReviews,
+                    [grade]: (prevReviews[grade] || 0) + 1,
+                }));
             }
         } catch (err) {
             console.error(err);
         }
     };
-
-    let navigationTriggered = false;
 
     const handleAnimationEnd = () => {
         if (answered) {
@@ -88,9 +94,8 @@ const CardReview: React.FC = () => {
                     newCards = newCards.filter((_, index) => index !== 0);
                 }
 
-                if (newCards.length === 0 && !navigationTriggered) {
-                    navigationTriggered = true;
-                    router.back();
+                if (newCards.length === 0) {
+                    setShowPostReviewAnalytics(true)
                 }
 
                 return newCards;
@@ -164,12 +169,15 @@ const CardReview: React.FC = () => {
 
     return (
         <section className="h-full w-full flex flex-col items-center justify-center">
+            {/* Toast */}
             {
                 showToast && nextReview &&
                 <Toast text={formatNextReview(nextReview)} />
             }
+
+            {/* Reviewing cards */}
             {
-                cards.length > 0 ? <section className="h-full w-full flex flex-col items-center justify-around">
+                cards.length > 0 && <section className="h-full w-full flex flex-col items-center justify-around">
                     {/* Cards */}
                     <section className="w-full flex flex-col items-center justify-center relative">
                         <h1 className="font-semibold text-light text-center mb-3">
@@ -230,7 +238,14 @@ const CardReview: React.FC = () => {
                             Perfect
                         </button>
                     </section>
-                </section> : <span className="text-light">Loading</span>
+                </section>
+            }
+
+            {/* Post review analytics */}
+            {
+                cards.length == 0 && showPostReviewAnalytics && <>
+                    <PostReviewAnalytics reviews={reviews} deckId={deckId} />
+                </>
             }
         </section>
     )
