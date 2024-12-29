@@ -16,7 +16,8 @@ const useGetDueCards = async (deckId: number): Promise<UseGetCardsResponse> => {
                 *
             FROM cards 
             WHERE deck_id = $1
-            AND next_review <= $2`,
+            AND next_review <= $2
+            ORDER BY next_review ASC`,
             [deckId, currentTimestamp]
         );
 
