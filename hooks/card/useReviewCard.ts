@@ -4,6 +4,7 @@ import useUpdateCard from "./useUpdateCard";
 interface UseGetCardsResponse {
     status: 'ok' | 'error';
     card?: Card;
+    next_review?: number;
     message?: string;
 }
 
@@ -18,24 +19,26 @@ const useReviewCard = async (card: Card, grade: number, algorithm: string): Prom
         const result: Card = await invoke(`review_${algorithm}`, { card, grade });
 
         if (result) {
-            useUpdateCard({
-                id: Number(card.id),
-                grade: grade,
-                next_review: new Date(result.next_review),
-                easiness_factor: result.easiness_factor,
-                interval: result.interval,
-                repetition: result.repetition,
-                stability: result.stability,
-                retrievability: result.retrievability,
-                difficulty: result.difficulty
-            });
-        }
+            switch (algorithm) {
+                case "sm2":
+                    useUpdateCard({
+                        id: Number(card.id),
+                        easiness_factor: result.easiness_factor,
+                        interval: result.interval,
+                        repetition: result.repetition,
+                        next_review: new Date(result.next_review),
+                        grade: grade,
+                    });
+                    break;
+            }
 
-        return { status: "ok" };
+            return { status: "ok", next_review: result.next_review };
+        }
     } catch (error) {
         console.error("Error reviewing card:", error);
         return { status: "error", message: String(error) };
     }
+    return { status: "error", message: "Unknown error" };
 };
 
 export default useReviewCard;

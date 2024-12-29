@@ -30,7 +30,6 @@ const useUpdateCard = async (card: UpdateCardProps): Promise<void> => {
 
     try {
         await db.execute(query, [...values, card.id]);
-        console.log("Card updated successfully");
     } catch (error) {
         console.error("Error updating card:", error);
     }

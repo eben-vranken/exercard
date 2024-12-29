@@ -4,6 +4,28 @@ import useGetDueCards from "@/hooks/card/useGetDueCards";
 import useReviewCard from "@/hooks/card/useReviewCard";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import Toast from "../Toast";
+
+const formatNextReview = (nextReview: number | null) => {
+    if (!nextReview) return '';
+
+    const nextReviewDate = new Date(nextReview * 1000);
+    const now = new Date();
+
+    const diffInMs = nextReviewDate.getTime() - now.getTime();
+
+    const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+    const diffInMinutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    if (diffInHours > 0) {
+        return `Next review in ${diffInHours} hour${diffInHours !== 1 ? 's' : ''}.`;
+    } else if (diffInMinutes > 0) {
+        return `Next review in ${diffInMinutes} minute${diffInMinutes !== 1 ? 's' : ''}.`;
+    } else {
+        return `Next review in less than a minute.`;
+    }
+};
+
 
 const CardReview: React.FC = () => {
     const router = useRouter()
@@ -11,14 +33,14 @@ const CardReview: React.FC = () => {
     const deckId = searchParams.get('deckId') || '';
     const reviewAlgorithm = searchParams.get('reviewAlgorithm') || '';
 
-    console.log(reviewAlgorithm)
-
     const [flipped, setFlipped] = useState<boolean>(false);
     const [answered, setAnswered] = useState<boolean>(false);
     const [answeredAnimation, setAnsweredAnimation] = useState<string>('');
     const [cards, setCards] = useState<Card[]>([]);
     const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
     const [selectedGrade, setSelectedGrade] = useState<string | null>(null);
+    const [nextReview, setNextReview] = useState<number | null>(null);
+    const [showToast, setShowToast] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchDueCards = async () => {
@@ -40,13 +62,13 @@ const CardReview: React.FC = () => {
         try {
             const result = await useReviewCard(cards[0], Number(grade), reviewAlgorithm);
 
-            if (result.status === 'ok') {
+            if (result.status === 'ok' && result.next_review) {
                 setIsTransitioning(true);
                 setAnswered(true);
                 setAnsweredAnimation(`answered-${grade}`);
                 setSelectedGrade(grade);
+                setNextReview(result.next_review);
             }
-
         } catch (err) {
             console.error(err);
         }
@@ -73,6 +95,7 @@ const CardReview: React.FC = () => {
             setFlipped(false);
             setIsTransitioning(false);
             setSelectedGrade(null);
+            setShowToast(false);
         }
     };
 
@@ -127,8 +150,18 @@ const CardReview: React.FC = () => {
         return layers;
     };
 
+    useEffect(() => {
+        if (answered && nextReview) {
+            setShowToast(true);
+        }
+    }, [answered, nextReview]);
+
     return (
         <section className="h-full w-full flex flex-col items-center justify-center">
+            {
+                showToast && nextReview &&
+                <Toast text={formatNextReview(nextReview)} />
+            }
             {
                 cards.length > 0 ? <section className="h-full w-full flex flex-col items-center justify-around">
                     {/* Cards */}

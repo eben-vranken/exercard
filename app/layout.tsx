@@ -29,7 +29,7 @@ declare global {
     easiness_factor: number;
     interval: number;
     grade: number;
-    next_review: Date;
+    next_review: number;
   }
 }
 
