@@ -40,7 +40,7 @@ const AddCardComponent: React.FC = () => {
         interval: 0,
         easiness_factor: 0,
         grade: 0,
-        next_review: new Date(),
+        next_review: Math.floor(Date.now() / 1000)
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -79,7 +79,7 @@ const AddCardComponent: React.FC = () => {
                     interval: 0,
                     easiness_factor: 0,
                     grade: 0,
-                    next_review: new Date()
+                    next_review: Math.floor(Date.now() / 1000)
                 });
 
                 // Add animation trigger for the new card

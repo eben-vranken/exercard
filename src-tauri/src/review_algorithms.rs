@@ -19,10 +19,10 @@ use tauri::command;
 pub fn review_sm2(card: Card, grade: u8) -> Card {
     let mut new_card = card;
         
-    if(grade >= 3) {
-        if(new_card.repetition == 0) {
+    if grade >= 3 {
+        if new_card.repetition == 0 {
             new_card.interval = 1;
-        } else if (new_card.repetition == 1) {
+        } else if new_card.repetition == 1 {
             new_card.interval = 6;
         } else {
             new_card.interval = (new_card.interval as f64 * new_card.easiness_factor).round() as u32;
@@ -34,7 +34,7 @@ pub fn review_sm2(card: Card, grade: u8) -> Card {
     }
     
     new_card.easiness_factor = new_card.easiness_factor + (0.1 - (5.0 - grade as f64) * (0.08 + (5.0 - grade as f64) * 0.02));
-    if(new_card.easiness_factor < 1.3) {
+    if new_card.easiness_factor < 1.3 {
         new_card.easiness_factor = 1.3;
     }
 
