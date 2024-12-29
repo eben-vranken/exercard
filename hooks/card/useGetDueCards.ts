@@ -9,19 +9,15 @@ interface UseGetCardsResponse {
 const useGetDueCards = async (deckId: number): Promise<UseGetCardsResponse> => {
     try {
         const db = await Database.load("sqlite:decks.db");
-
-        const todayEnd = new Date();
-        todayEnd.setHours(23, 59, 59, 999);
-        const todayEndTimestamp = todayEnd.getTime();
+        const currentTimestamp = Math.floor(Date.now() / 1000);
 
         const result = await db.select(
             `SELECT 
                 *
             FROM cards 
-            WHERE deck_id = $1 
-            AND next_review <= $2
-            ORDER BY next_review ASC`,
-            [deckId, todayEndTimestamp]
+            WHERE deck_id = $1
+            AND next_review <= $2`,
+            [deckId, currentTimestamp]
         );
 
         return {

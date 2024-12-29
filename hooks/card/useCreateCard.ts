@@ -10,7 +10,7 @@ const useCreateCard = async (card: Card): Promise<{ status: string, message: str
                 card.deckId,
                 card.front,
                 card.back,
-                Date.now()
+                Math.floor(Date.now() / 1000)
             ]
         );
 
