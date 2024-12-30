@@ -17,7 +17,7 @@ const PostReviewAnalytics: React.FC<PostReviewAnalyticsProps> = ({ reviews, deck
         <section className="h-full w-full p-5">
             <section className="flex justify-between items-center gap-x-5 mb-5 w-fit">
                 <h1 className="font-bold">Review Analytics</h1>
-                <Link href={`/deck?deckId=${deckId}`} className="flex items-center hover:text-light">
+                <Link href={`/deck?deckId=${deckId}`} className="flex items-center hover:text-light underline">
                     Back
                 </Link>
             </section>
