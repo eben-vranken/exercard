@@ -65,20 +65,17 @@ const AddCardComponent: React.FC = () => {
     const handleTagKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter' && tagInput.trim()) {
             e.preventDefault();
-            const normalizedTag = tagInput.trim().toLowerCase(); // Normalize for comparison
-            
+            const normalizedTag = tagInput.trim().toLowerCase();
+
             // Check both length limit and uniqueness
             if (newCardData.tags.length >= 5) {
-                alert("You cannot add more than 5 tags.");
                 return;
             }
-            
+
             if (newCardData.tags.map(tag => tag.toLowerCase()).includes(normalizedTag)) {
-                alert("Tag must be unique.");
                 return;
             }
-            
-            // If both checks pass, add the tag
+
             setNewCardData(prev => ({
                 ...prev,
                 tags: [...prev.tags, tagInput.trim()]
@@ -139,7 +136,7 @@ const AddCardComponent: React.FC = () => {
         }
     };
 
-    
+
     return (
         <section className="h-full w-full flex overflow-hidden justify-between">
             <section className="w-full flex items-center justify-center">
@@ -180,16 +177,16 @@ const AddCardComponent: React.FC = () => {
                         />
                     </section>
 
-                   {/* Tags */}
-                   <section className="flex flex-col">
+                    {/* Tags */}
+                    <section className="flex flex-col ">
                         <section>
                             <label htmlFor="tags" className="text-sm text-light">Tags</label>
                         </section>
-                        <section className="styled-input flex flex-wrap gap-2 min-h-[38px] items-center">
+                        <section className="styled-input flex flex-wrap gap-2 min-h-[38px] items-center overflow-x-scroll scrollbar-thin">
                             {newCardData.tags.map((tag, index) => (
                                 <span
                                     key={index}
-                                    className="bg-white/10 px-2 py-1 rounded-full text-sm flex items-center gap-x-1"
+                                    className="bg-white/10 px-2 py-1 rounded-full text-sm flex items-center gap-x-1 text-wrap"
                                 >
                                     {tag}
                                     <button
