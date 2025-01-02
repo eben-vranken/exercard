@@ -42,7 +42,7 @@ pub fn run() {
             description: "create tags table",
             sql: "CREATE TABLE IF NOT EXISTS tags (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL UNIQUE
+                name TEXT NOT NULL UNIQUE 
             )",
             kind: MigrationKind::Up,
         },
@@ -56,6 +56,21 @@ pub fn run() {
                 FOREIGN KEY (card_id) REFERENCES cards(id) ON DELETE CASCADE,
                 FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
             )",
+            kind: MigrationKind::Up,
+        },
+        Migration {
+            version: 5,
+            description: "create trigger to delete unused tags",
+            sql: r#"
+                CREATE TRIGGER IF NOT EXISTS delete_unused_tags
+                BEFORE DELETE ON tags
+                FOR EACH ROW
+                BEGIN
+                    DELETE FROM tags WHERE id = OLD.id AND NOT EXISTS (
+                        SELECT 1 FROM card_tags WHERE tag_id = OLD.id
+                    );
+                END;
+            "#,
             kind: MigrationKind::Up,
         }
     ];
