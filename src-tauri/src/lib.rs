@@ -36,6 +36,27 @@ pub fn run() {
                 FOREIGN KEY(deck_id) REFERENCES decks(id)
             )",
             kind: MigrationKind::Up,
+        },
+        Migration {
+            version: 3,
+            description: "create tags table",
+            sql: "CREATE TABLE IF NOT EXISTS tags (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL UNIQUE
+            )",
+            kind: MigrationKind::Up,
+        },
+        Migration {
+            version: 4,
+            description: "create card_tags junction table",
+            sql: "CREATE TABLE IF NOT EXISTS card_tags (
+                card_id INTEGER,
+                tag_id INTEGER,
+                PRIMARY KEY (card_id, tag_id),
+                FOREIGN KEY (card_id) REFERENCES cards(id) ON DELETE CASCADE,
+                FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
+            )",
+            kind: MigrationKind::Up,
         }
     ];
         
