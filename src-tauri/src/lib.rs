@@ -14,8 +14,8 @@ pub fn run() {
                 name TEXT NOT NULL,
                 description TEXT,
                 algorithm TEXT NOT NULL DEFAULT 'sm2'
-        )",
-        kind: MigrationKind::Up,
+            )",
+            kind: MigrationKind::Up,
         },
         Migration {
             version: 2,
@@ -33,7 +33,7 @@ pub fn run() {
                 interval INTEGER DEFAULT 1,     -- SM-2-specific
                 grade INTEGER DEFAULT 0,        -- User's last review grade
                 next_review INTEGER NOT NULL,  -- User's next review time
-                FOREIGN KEY(deck_id) REFERENCES decks(id)
+                FOREIGN KEY(deck_id) REFERENCES decks(id) ON DELETE CASCADE
             )",
             kind: MigrationKind::Up,
         },
@@ -59,8 +59,8 @@ pub fn run() {
             kind: MigrationKind::Up,
         }
     ];
-        
-  tauri::Builder::default()
+
+    tauri::Builder::default()
         .plugin(
             tauri_plugin_sql::Builder::default()
                 .add_migrations("sqlite:decks.db", migrations)

@@ -8,15 +8,13 @@ interface Deck {
 
 const useDeleteDeck = async (deck: Deck): Promise<{ status: string, message: string }> => {
     try {
+        console.log("Deleting deck:", deck);
         const db = await Database.load('sqlite:decks.db');
 
-        // Enable foreign key constraints
         await db.execute('PRAGMA foreign_keys = ON;');
 
-        // Execute the deletion query
         const result = await db.execute('DELETE FROM decks WHERE id = ?', [deck.id]);
 
-        // Log the result of the delete operation
         console.log('Delete result:', result);
 
         if (result.rowsAffected === 0) {

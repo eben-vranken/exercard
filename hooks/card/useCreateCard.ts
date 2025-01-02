@@ -1,6 +1,13 @@
 import Database from "@tauri-apps/plugin-sql";
 
-const useCreateCard = async (card: Card): Promise<{ status: string, message: string }> => {
+interface NewCard {
+    deckId: number,
+    front: string,
+    back: string,
+    tags: string[],
+}
+
+const useCreateCard = async (card: NewCard): Promise<{ status: string, message: string }> => {
     try {
         const db = await Database.load("sqlite:decks.db");
 

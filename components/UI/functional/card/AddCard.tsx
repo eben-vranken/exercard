@@ -7,11 +7,19 @@ import { Pencil, Trash } from "@phosphor-icons/react/dist/ssr";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
+interface NewCard {
+    deckId: number,
+    front: string,
+    back: string,
+    tags: string[],
+}
+
 const AddCardComponent: React.FC = () => {
     const searchParams = useSearchParams();
     const deckId = searchParams.get('deckId') || '';
     const [cards, setCards] = useState<Card[] | null>(null);
     const [animating, setAnimating] = useState(false);
+    const [tagInput, setTagInput] = useState('');
 
     const fetchCards = async () => {
         if (deckId) {
@@ -28,19 +36,11 @@ const AddCardComponent: React.FC = () => {
         fetchCards();
     }, [deckId]);
 
-    const [newCardData, setNewCardData] = useState<Card>({
-        id: Number(null),
+    const [newCardData, setNewCardData] = useState<NewCard>({
         deckId: Number(deckId),
         front: '',
         back: '',
-        retrievability: 0,
-        stability: 0,
-        difficulty: 0,
-        repetition: 0,
-        interval: 0,
-        easiness_factor: 0,
-        grade: 0,
-        next_review: Math.floor(Date.now() / 1000)
+        tags: [],
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -58,6 +58,41 @@ const AddCardComponent: React.FC = () => {
         }
     };
 
+    const handleTagInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTagInput(e.target.value);
+    };
+
+    const handleTagKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && tagInput.trim()) {
+            e.preventDefault();
+            const normalizedTag = tagInput.trim().toLowerCase(); // Normalize for comparison
+            
+            // Check both length limit and uniqueness
+            if (newCardData.tags.length >= 5) {
+                alert("You cannot add more than 5 tags.");
+                return;
+            }
+            
+            if (newCardData.tags.map(tag => tag.toLowerCase()).includes(normalizedTag)) {
+                alert("Tag must be unique.");
+                return;
+            }
+            
+            // If both checks pass, add the tag
+            setNewCardData(prev => ({
+                ...prev,
+                tags: [...prev.tags, tagInput.trim()]
+            }));
+            setTagInput('');
+        } else if (e.key === 'Backspace' && !tagInput) {
+            e.preventDefault();
+            setNewCardData(prev => ({
+                ...prev,
+                tags: prev.tags.slice(0, -1)
+            }));
+        }
+    };
+
     const firstInputRef = useRef<HTMLInputElement>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -68,18 +103,10 @@ const AddCardComponent: React.FC = () => {
 
             if (result.status == "ok") {
                 setNewCardData({
-                    id: Number(null),
                     deckId: Number(deckId),
                     front: '',
                     back: '',
-                    retrievability: 0,
-                    stability: 0,
-                    difficulty: 0,
-                    repetition: 0,
-                    interval: 0,
-                    easiness_factor: 0,
-                    grade: 0,
-                    next_review: Math.floor(Date.now() / 1000)
+                    tags: []
                 });
 
                 // Add animation trigger for the new card
@@ -112,11 +139,13 @@ const AddCardComponent: React.FC = () => {
         }
     };
 
+    
     return (
         <section className="h-full w-full flex overflow-hidden justify-between">
             <section className="w-full flex items-center justify-center">
                 {/* New Card Details */}
                 <form className="flex flex-col w-1/3 justify-center items-center gap-y-3 [&>*]:gap-y-1 [&>*]:w-full" onSubmit={handleSubmit}>
+                    {/* Front */}
                     <section className="flex flex-col">
                         <section>
                             <label htmlFor="front" className="text-sm text-light">Front</label>
@@ -134,6 +163,7 @@ const AddCardComponent: React.FC = () => {
                         />
                     </section>
 
+                    {/* Back */}
                     <section className="flex flex-col">
                         <section>
                             <label htmlFor="back" className="text-sm text-light">Back</label>
@@ -148,6 +178,45 @@ const AddCardComponent: React.FC = () => {
                             value={newCardData.back}
                             required
                         />
+                    </section>
+
+                   {/* Tags */}
+                   <section className="flex flex-col">
+                        <section>
+                            <label htmlFor="tags" className="text-sm text-light">Tags</label>
+                        </section>
+                        <section className="styled-input flex flex-wrap gap-2 min-h-[38px] items-center">
+                            {newCardData.tags.map((tag, index) => (
+                                <span
+                                    key={index}
+                                    className="bg-white/10 px-2 py-1 rounded-full text-sm flex items-center gap-x-1"
+                                >
+                                    {tag}
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setNewCardData(prev => ({
+                                                ...prev,
+                                                tags: prev.tags.filter((_, i) => i !== index)
+                                            }));
+                                        }}
+                                        className="hover:text-red-400"
+                                    >
+                                        ×
+                                    </button>
+                                </span>
+                            ))}
+                            {newCardData.tags.length < 5 && (
+                                <input
+                                    type="text"
+                                    value={tagInput}
+                                    onChange={handleTagInputChange}
+                                    onKeyDown={handleTagKeyDown}
+                                    className="flex-1 bg-transparent outline-none border-none placeholder:text-ultralight"
+                                    placeholder={newCardData.tags.length === 0 ? "Type and press enter to add tags..." : ""}
+                                />
+                            )}
+                        </section>
                     </section>
 
                     <section className="w-full md:w-2/3 text-ultralight flex text-xs">
