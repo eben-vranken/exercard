@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/UI/functional/Navbar";
 import useGetSpecificDeck from "@/hooks/deck/useGetSpecificDeck";
-import { Pencil, Plus, Trash } from "@phosphor-icons/react/dist/ssr";
+import { BookBookmark, Pencil, Plus, Trash } from "@phosphor-icons/react/dist/ssr";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ConfirmModal from "../ConfirmModal";
@@ -128,6 +128,9 @@ function DeckContent() {
 
                                     {/* Deck options */}
                                     <section className="flex gap-x-4 opacity-75">
+                                        <Link href={`/browse-cards?deckId=${deck.id}`} className="cursor-pointer hover:opacity-75">
+                                            <BookBookmark size={25} />
+                                        </Link>
                                         <Link href={`/add-cards?deckId=${deck.id}`} className="cursor-pointer hover:opacity-75">
                                             <Plus size={25} />
                                         </Link>
