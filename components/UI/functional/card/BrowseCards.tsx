@@ -1,18 +1,20 @@
 'use client'
-
-import useGetCards from "@/hooks/card/useGetCards";
-import { useRouter, useSearchParams } from "next/navigation";
+import useGetCardsWithTags from "@/hooks/card/useGetCardsWithTags";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+
+interface CardWithTags extends Card {
+    tags: { id: number; name: string; }[];
+}
 
 const BrowseCards: React.FC = () => {
     const searchParams = useSearchParams();
     const deckId: number = Number(searchParams.get('deckId')) || 0;
-    const [cards, setCards] = useState<Card[] | null>(null);
+    const [cards, setCards] = useState<CardWithTags[] | null>(null);
 
     useEffect(() => {
-        // Get all cards
         const fetchCards = async () => {
-            const results = await useGetCards(deckId)
+            const results = await useGetCardsWithTags(deckId);
             if (results.status === 'ok' && results.data) {
                 setCards(results.data);
             } else {
@@ -20,19 +22,44 @@ const BrowseCards: React.FC = () => {
             }
         }
         fetchCards();
-    }, [deckId])
+    }, [deckId]);
 
     return (
-        <section className="h-full w-full">
-            {
-                cards && cards.map((card, index) => (
-                    <section key={index} className="w-full p-2 border border-gray-200 rounded-md mb-2">
-                        <h3 className="text-responsive-sm font-semibold">{card.front}</h3>
-                        <p className="text-responsive-xs">{card.back}</p>
-                    </section>
-                ))
-            }
-        </section>
+        <section className="h-full w-full flex flex-col overflow-y-scroll pb-10">
+            {cards ? (
+                <table className="w-full table-auto border border-white /10 ">
+                    < thead >
+                        <tr>
+                            <th className="border border-white/10 px-4 py-2 text-left">Front</th>
+                            <th className="border border-white/10 px-4 py-2 text-left">Back</th>
+                            <th className="border border-white/10 px-4 py-2 text-left">Tags</th>
+                        </tr>
+                    </thead >
+                    <tbody>
+                        {cards.map((card, index) => (
+                            <tr key={index} className="hover:bg-white/5 [&>*]:p-2 [&>*]:overflow-ellipsis">
+                                <td className="border border-white/10">{card.front}</td>
+                                <td className="border border-white/10">{card.back}</td>
+                                <td className="border border-white/10">
+                                    <section className="flex gap-1 w-full">
+                                        {card.tags.map((tag) => (
+                                            <span
+                                                key={tag.id}
+                                                className="bg-white/10 text-sm px-2 py-1 rounded-md"
+                                            >
+                                                {tag.name}
+                                            </span>
+                                        ))}
+                                    </section>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table >
+            ) : (
+                <p className="text-center text-white">Loading cards...</p>
+            )}
+        </section >
     );
 }
 
