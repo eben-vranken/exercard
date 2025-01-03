@@ -37,7 +37,7 @@ const BrowseCards: React.FC = () => {
                     </thead >
                     <tbody>
                         {cards.map((card, index) => (
-                            <tr key={index} className="hover:bg-white/5 [&>*]:p-2 [&>*]:overflow-ellipsis">
+                            <tr key={index} className="hover:bg-white/5 [&>*]:p-2 [&>*]:overflow-ellipsis cursor-pointer">
                                 <td className="border border-white/10">{card.front}</td>
                                 <td className="border border-white/10">{card.back}</td>
                                 <td className="border border-white/10">
