@@ -27,7 +27,7 @@ const BrowseCards: React.FC = () => {
     return (
         <section className="h-full w-full flex flex-col overflow-y-scroll pb-10">
             {cards ? (
-                <table className="w-full table-auto border border-white /10 ">
+                <table>
                     < thead >
                         <tr>
                             <th className="border border-white/10 px-4 py-2 text-left">Front</th>
