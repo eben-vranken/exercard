@@ -4,10 +4,10 @@
 
 :root {
   --background: #1E1E1E;
-  --text-main: rgba(255, 255, 255, 0.75);
-  --text-medium: rgba(255, 255, 255, 0.5);
-  --text-light: rgba(255, 255, 255, 0.25);
-  --text-ultralight: rgba(255, 255, 255, 0.15);
+  --text-main: rgba(255, 255, 255, 1);
+  --text-medium: rgba(255, 255, 255, 0.75);
+  --text-light: rgba(255, 255, 255, 0.5);
+  --text-ultralight: rgba(255, 255, 255, 0.25);
   --primary: 67, 87, 236;
 }
 
