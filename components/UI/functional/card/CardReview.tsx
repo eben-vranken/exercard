@@ -152,7 +152,7 @@ const CardReview: React.FC = () => {
             layers.push(
                 <section
                     key={i}
-                    className="h-2 mx-auto bg-white/[3%] rounded-b border border-white/5 transition-opacity duration-300"
+                    className="h-2 mx-auto bg-white/[3%] rounded-b border border-light transition-opacity duration-300"
                     style={{ opacity, width: `${width}%` }}
                 />
             );
@@ -194,7 +194,7 @@ const CardReview: React.FC = () => {
                                 className={`
                                 ${answeredAnimation} 
                                 ${!answeredAnimation && !isTransitioning ? 'card-entry' : ''} 
-                                border border-white/5 rounded aspect-video flex flex-col gap-y-3 justify-center items-center px-5 overflow-hidden lg:text-lg xl:text-2xl text-center
+                                border border-light rounded aspect-video flex flex-col gap-y-3 justify-center items-center px-5 overflow-hidden lg:text-lg xl:text-2xl text-center
                             `}
                                 onAnimationEnd={answered ? handleAnimationEnd : undefined}
                             >
@@ -217,23 +217,23 @@ const CardReview: React.FC = () => {
 
                     {/* Actions */}
                     <section className={`flex gap-x-2 font-semibold ${flipped ? "" : "opacity-0 pointer-events-none"}`}>
-                        <button onClick={(e) => handleButtonClick(1, e)} className={`flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-red-500/75 opacity-50 ${selectedGrade === 1 ? "bg-white/5 transition-colors duration-300" : ""}`}>
+                        <button onClick={(e) => handleButtonClick(1, e)} className={`flex gap-x-2 border border-light rounded hover:bg-white/5 p-2 text-red-500/75 opacity-50 ${selectedGrade === 1 ? "bg-white/5 transition-colors duration-300" : ""}`}>
                             <span className="text-light">1.</span>
                             Again
                         </button>
-                        <button onClick={(e) => handleButtonClick(2, e)} className={`flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-orange-500/75 opacity-50 ${selectedGrade === 2 ? "bg-white/5 transition-colors duration-300" : ""}`}>
+                        <button onClick={(e) => handleButtonClick(2, e)} className={`flex gap-x-2 border border-light rounded hover:bg-white/5 p-2 text-orange-500/75 opacity-50 ${selectedGrade === 2 ? "bg-white/5 transition-colors duration-300" : ""}`}>
                             <span className="text-light">2.</span>
                             Hard
                         </button>
-                        <button onClick={(e) => handleButtonClick(3, e)} className={`flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-yellow-500/75 opacity-50 ${selectedGrade === 3 ? "bg-white/5 transition-colors duration-300" : ""}`}>
+                        <button onClick={(e) => handleButtonClick(3, e)} className={`flex gap-x-2 border border-light rounded hover:bg-white/5 p-2 text-yellow-500/75 opacity-50 ${selectedGrade === 3 ? "bg-white/5 transition-colors duration-300" : ""}`}>
                             <span className="text-light">3.</span>
                             Normal
                         </button>
-                        <button onClick={(e) => handleButtonClick(4, e)} className={`flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-green-500/75 opacity-50 ${selectedGrade === 4 ? "bg-white/5 transition-colors duration-300" : ""}`}>
+                        <button onClick={(e) => handleButtonClick(4, e)} className={`flex gap-x-2 border border-light rounded hover:bg-white/5 p-2 text-green-500/75 opacity-50 ${selectedGrade === 4 ? "bg-white/5 transition-colors duration-300" : ""}`}>
                             <span className="text-light">4.</span>
                             Easy
                         </button>
-                        <button onClick={(e) => handleButtonClick(5, e)} className={`flex gap-x-2 border border-white/5 rounded hover:bg-white/5 p-2 text-blue-500/75 opacity-50 ${selectedGrade === 5 ? "bg-white/5 transition-colors duration-300" : ""}`}>
+                        <button onClick={(e) => handleButtonClick(5, e)} className={`flex gap-x-2 border border-light rounded hover:bg-white/5 p-2 text-blue-500/75 opacity-50 ${selectedGrade === 5 ? "bg-white/5 transition-colors duration-300" : ""}`}>
                             <span className="text-light">5.</span>
                             Perfect
                         </button>

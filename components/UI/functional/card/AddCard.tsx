@@ -232,7 +232,7 @@ const AddCardComponent: React.FC = () => {
                 {cards?.length ? (
                     <section className="flex flex-col-reverse gap-y-2">
                         {cards.map((card, id) => (
-                            <section key={id} className={`flex justify-between items-center border border-white/10 rounded p-1 card-entry`}>
+                            <section key={id} className={`flex justify-between items-center border border-light rounded p-1 card-entry`}>
                                 <section className="flex flex-col w-3/4 ">
                                     <span className="text-light line-clamp-2">{card.front}</span>
                                     <span className="text-ultralight line-clamp-2">{card.back}</span>

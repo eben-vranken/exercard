@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
 
     return (
         <aside
-            className={`h-full border-r bg-background z-10 border-white border-opacity-5 flex flex-col overflow-hidden transition-all duration-300 ${isOpen ? "w-72 md:w-96" : "w-0"
+            className={`h-full border-r bg-background z-10 border-light flex flex-col overflow-hidden transition-all duration-300 ${isOpen ? "w-72 md:w-96" : "w-0"
                 }`}
         >
             {/* Header */}
@@ -52,7 +52,7 @@ const Sidebar: React.FC = () => {
                 </section>
 
                 {/* Horizontal Divider */}
-                <section className="opacity-5 border my-4" />
+                <section className="border border-light my-4" />
 
                 {/* Decks */}
                 <span className="text-xs text-ultralight">Decks</span>

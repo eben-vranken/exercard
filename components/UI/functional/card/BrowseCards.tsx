@@ -52,17 +52,17 @@ const BrowseCards: React.FC = () => {
                     <table>
                         < thead >
                             <tr>
-                                <th className="border border-white/10 px-4 py-2 text-left">Front</th>
-                                <th className="border border-white/10 px-4 py-2 text-left">Back</th>
-                                <th className="border border-white/10 px-4 py-2 text-left">Tags</th>
+                                <th className="border border-light px-4 py-2 text-left">Front</th>
+                                <th className="border border-light px-4 py-2 text-left">Back</th>
+                                <th className="border border-light px-4 py-2 text-left">Tags</th>
                             </tr>
                         </thead >
                         <tbody>
                             {filteredCards?.map((card, index) => (
                                 <tr key={index} className="hover:bg-white/5 [&>*]:p-2 [&>*]:overflow-ellipsis cursor-pointer">
-                                    <td className="border border-white/10">{card.front}</td>
-                                    <td className="border border-white/10">{card.back}</td>
-                                    <td className="border border-white/10">
+                                    <td className="border border-light">{card.front}</td>
+                                    <td className="border border-light">{card.back}</td>
+                                    <td className="border border-light">
                                         <section className="flex gap-1 w-full">
                                             {card.tags.map((tag) => (
                                                 <span

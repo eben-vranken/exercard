@@ -154,7 +154,7 @@ function DeckContent() {
                                                     dueCards && dueCards?.length > 0 ?
                                                         // Cards to review
                                                         <Link href={`/review?deckId=${deck.id}&reviewAlgorithm=${deck.algorithm}`} className="cursor-pointer">
-                                                            <section className="flex flex-col items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer p-3">
+                                                            <section className="flex flex-col items-center justify-center border border-light rounded hover:bg-white/[1%] cursor-pointer p-3">
                                                                 <h2 className="text-light">Review Cards</h2>
                                                                 <span className="text-ultralight text-sm">You have {dueCards.length} cards due!</span>
                                                             </section>
@@ -170,9 +170,9 @@ function DeckContent() {
 
                                     {/* Activities */}
                                     <section className="h-[100px] w-full md:w-2/3 flex flex-col md:flex-row gap-x-1 text-light">
-                                        <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Quiz Me</section>
-                                        <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Let's Talk</section>
-                                        <section className="flex flex-1 items-center justify-center border border-white/5 rounded hover:bg-white/[1%] cursor-pointer">Explain It</section>
+                                        <section className="flex flex-1 items-center justify-center border border-light rounded hover:bg-white/[1%] cursor-pointer">Quiz Me</section>
+                                        <section className="flex flex-1 items-center justify-center border border-light rounded hover:bg-white/[1%] cursor-pointer">Let's Talk</section>
+                                        <section className="flex flex-1 items-center justify-center border border-light rounded hover:bg-white/[1%] cursor-pointer">Explain It</section>
                                     </section>
                                 </section>
                             </section>

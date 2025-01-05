@@ -18,7 +18,7 @@ const Create: React.FC = () => {
                 {/* Creation Options */}
                 <section className="h-full flex flex-col lg:flex-row flex-wrap justify-center items-center gap-[10px]">
                     {/* Manually */}
-                    <Link href={'/create-deck/manual'} className="w-full lg:w-[45%] h-2/5 flex flex-col gap-y-2 justify-center items-center rounded border border-white/5 hover:bg-white/[1%] cursor-pointer">
+                    <Link href={'/create-deck/manual'} className="w-full lg:w-[45%] h-2/5 flex flex-col gap-y-2 justify-center items-center rounded border border-light hover:bg-white/[1%] cursor-pointer">
                         <section className="flex items-center gap-x-2">
                             <Gavel size={25} className="text-primary" />
                             <span className="text-sm text-light font-semibold">Create manually</span>
@@ -27,7 +27,7 @@ const Create: React.FC = () => {
                     </Link>
 
                     {/* AI */}
-                    <section className="w-full lg:w-[45%] h-2/5 flex gap-y-2 flex-col justify-center items-center rounded border border-white/5 hover:bg-white/[1%] cursor-not-allowed">
+                    <section className="w-full lg:w-[45%] h-2/5 flex gap-y-2 flex-col justify-center items-center rounded border border-light hover:bg-white/[1%] cursor-not-allowed">
                         <section className="flex items-center gap-x-2">
                             <Sparkle size={25} className="text-primary" />
                             <span className="text-sm text-light font-semibold">Create with AI</span>
