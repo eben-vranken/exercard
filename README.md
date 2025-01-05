@@ -2,7 +2,7 @@ Exercard aims to be a free and open-source equivalent of popular flashcard appli
 
 [Find out](https://app.milanote.com/publish-preview/1ThT4u10M1lr1V) what is currently being worked on, what is planned, and more.
 
-https://github.com/user-attachments/assets/c7d1568d-f9d0-4d93-9aba-1e6c4f75f70f
+https://github.com/user-attachments/assets/7119b440-40f8-4243-9627-e11a5ef36ec4
 
 ## Getting Started
 
