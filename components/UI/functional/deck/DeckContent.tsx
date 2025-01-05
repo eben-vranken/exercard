@@ -128,11 +128,11 @@ function DeckContent() {
 
                                     {/* Deck options */}
                                     <section className="flex gap-x-4 opacity-75">
-                                        <Link href={`/browse-cards?deckId=${deck.id}`} className="cursor-pointer hover:opacity-75">
-                                            <BookBookmark size={25} />
-                                        </Link>
                                         <Link href={`/add-cards?deckId=${deck.id}`} className="cursor-pointer hover:opacity-75">
                                             <Plus size={25} />
+                                        </Link>
+                                        <Link href={`/browse-cards?deckId=${deck.id}`} className="cursor-pointer hover:opacity-75">
+                                            <BookBookmark size={25} />
                                         </Link>
                                         <Link href={`/edit-deck?deckId=${deck.id}`} className="cursor-pointer hover:opacity-75">
                                             <Pencil size={25} />
