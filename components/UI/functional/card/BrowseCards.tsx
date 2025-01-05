@@ -1,5 +1,5 @@
 'use client'
-import useGetCardsWithTags from "@/hooks/card/useGetCardsWithTags";
+import useGetCards from "@/hooks/card/useGetCards";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -16,7 +16,7 @@ const BrowseCards: React.FC = () => {
 
     useEffect(() => {
         const fetchCards = async () => {
-            const results = await useGetCardsWithTags(deckId);
+            const results = await useGetCards(deckId);
             if (results.status === 'ok' && results.data) {
                 setCards(results.data);
                 setFilteredCards(results.data);

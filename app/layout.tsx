@@ -31,6 +31,15 @@ declare global {
     grade: number;
     next_review: number;
   }
+
+  interface Tag {
+    id: number;
+    name: string;
+  }
+
+  interface CardWithTags extends Card {
+    tags: Tag[]
+  }
 }
 
 const inter = localFont({

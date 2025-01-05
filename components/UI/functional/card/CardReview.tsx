@@ -6,7 +6,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Toast from "../Toast";
 import PostReviewAnalytics from "./PostReviewAnalytics";
-import Link from "next/link";
 
 const formatNextReview = (nextReview: number | null) => {
     if (!nextReview) return '';
@@ -37,7 +36,7 @@ const CardReview: React.FC = () => {
     const [flipped, setFlipped] = useState<boolean>(false);
     const [answered, setAnswered] = useState<boolean>(false);
     const [answeredAnimation, setAnsweredAnimation] = useState<string>('');
-    const [cards, setCards] = useState<Card[]>([]);
+    const [cards, setCards] = useState<CardWithTags[]>([]);
     const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
     const [selectedGrade, setSelectedGrade] = useState<number | null>(null);
     const [nextReview, setNextReview] = useState<number | null>(null);
@@ -168,11 +167,11 @@ const CardReview: React.FC = () => {
     }, [answered, nextReview]);
 
     return (
-        <section className="h-full w-full flex flex-col items-center justify-center">
+        <section className="h-full w-full flex flex-col items-center justify-center relative">
             {/* Toast */}
             {
                 showToast && nextReview &&
-                <Toast text={formatNextReview(nextReview)} />
+                <Toast text={formatNextReview(nextReview)} position="top" />
             }
 
             {/* Reviewing cards */}
