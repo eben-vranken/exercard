@@ -46,7 +46,7 @@ const BrowseCards: React.FC = () => {
         <section className="h-full w-full flex flex-col gap-y-2 overflow-y-scroll pb-10">
             {cards ? (
                 <>
-                    <section className="flex flex-col w-min">
+                    <section className="flex flex-col">
                         <input type="text" id="card-search" className="styled-input placeholder:text-white/20" placeholder="Search..." value={filterText} onChange={handleChange} />
                     </section>
                     <table>
