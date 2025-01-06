@@ -42,7 +42,7 @@ const CardReview: React.FC = () => {
     const [nextReview, setNextReview] = useState<number | null>(null);
     const [showToast, setShowToast] = useState<boolean>(false);
     const [showPostReviewAnalytics, setShowPostReviewAnalytics] = useState<boolean>(false);
-    const [reviews, setReviews] = useState<{ [key: number]: number }>({});
+    const [reviews, setReviews] = useState<CardWithTags[]>([]);
 
     useEffect(() => {
         const fetchDueCards = async () => {
@@ -69,12 +69,9 @@ const CardReview: React.FC = () => {
                 setAnswered(true);
                 setAnsweredAnimation(`answered-${grade}`);
                 setSelectedGrade(grade);
+                setReviews((prevReviews) => [...prevReviews, { ...cards[0], grade }]);
                 setNextReview(result.next_review);
 
-                setReviews(prevReviews => ({
-                    ...prevReviews,
-                    [grade]: (prevReviews[grade] || 0) + 1,
-                }));
             }
         } catch (err) {
             console.error(err);
@@ -243,7 +240,7 @@ const CardReview: React.FC = () => {
             {/* Post review analytics */}
             {
                 cards.length == 0 && showPostReviewAnalytics && <>
-                    <PostReviewAnalytics reviews={reviews} deckId={deckId} />
+                    <PostReviewAnalytics reviews={reviews} deckId={Number(deckId)} />
                 </>
             }
         </section>

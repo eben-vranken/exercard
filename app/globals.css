@@ -38,6 +38,28 @@ body {
   border-color: rgba(255, 255, 255, 0.10);
 }
 
+/* Colors */
+.red {
+  color: rgb(239 68 68 / 0.75);
+}
+
+.orange {
+  color: rgb(249 115 22 / 0.75);
+}
+
+.yellow {
+  color: rgb(234 179 8 / 0.75);
+}
+
+.green {
+  color: rgb(34 197 94 / 0.75);
+}
+
+.blue {
+  color: rgb(59 130 246 / 0.75);
+}
+
+
 ::-webkit-scrollbar {
   width: 5px;
   scrollbar-width: thin;
@@ -274,3 +296,4 @@ body {
 .toast-animation-bottom {
   animation: toast-animation-bottom 1s ease-in-out forwards;
 }
+
