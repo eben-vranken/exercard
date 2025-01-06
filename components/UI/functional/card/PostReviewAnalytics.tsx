@@ -71,7 +71,7 @@ const PostReviewAnalytics: React.FC<PostReviewAnalyticsProps> = ({ reviews, deck
 
                         return (
                             <section
-                                className={`relative flex flex-col items-center justify-center gap-y-6 p-4 w-full min-h-[200px] max-w-sm mx-auto border border-light rounded ${cardBackground}`}
+                                className={`relative flex flex-col items-center justify-center gap-y-6 p-4 w-full min-h-[250px] max-w-sm mx-auto border border-light rounded ${cardBackground}`}
                                 key={index}
                             >
                                 <span className="absolute top-4 left-4 text-ultralight font-light">{index + 1}</span>
