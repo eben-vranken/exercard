@@ -176,13 +176,15 @@ const CardReview: React.FC = () => {
                 cards.length > 0 && <section className="h-full w-full flex flex-col items-center justify-around">
                     {/* Cards */}
                     <section className="w-full flex flex-col items-center justify-center relative">
-                        <h1 className="font-semibold text-light text-center mb-3">
-                            <span className="text-green-500 opacity-50">
-                                {cards.length}
-                            </span>
-                            &nbsp;
-                            cards for review
-                        </h1>
+                        <section className="w-3/5 ">
+                            <h1 className="font-semibold text-light mb-3">
+                                <span className="text-green-500 opacity-50">
+                                    {cards.length}
+                                </span>
+                                &nbsp;
+                                cards for review
+                            </h1>
+                        </section>
 
                         {/* Current card */}
                         <section className="w-3/5 flex flex-col">

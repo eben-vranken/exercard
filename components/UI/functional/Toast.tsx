@@ -15,7 +15,7 @@ const Toast: React.FC<ToastProps> = ({ text, position }) => {
 
     return (
         <section
-            className={`absolute ${positionClass} px-3 py-2 bg-background border border-light rounded-full text-medium`}
+            className={`absolute ${positionClass} px-3 py-2 bg-background border border-light rounded-full text-medium z-10`}
         >
             {text}
         </section>

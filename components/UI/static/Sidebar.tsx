@@ -26,8 +26,8 @@ const Sidebar: React.FC = () => {
                 </section>
                 {/* Icons */}
                 <section className="flex items-center gap-x-2 text-light z-10">
-                    <CustomLink href={"profile"} content={<UserCircle size={25} />} />
-                    <CustomLink href={"settings"} content={<Gear size={25} />} />
+                    <CustomLink href={"/profile"} content={<UserCircle size={25} />} />
+                    <CustomLink href={"/settings"} content={<Gear size={25} />} />
                     {/* Toggle Button */}
                     <button
                         className="text-light flex items-center justify-center"
