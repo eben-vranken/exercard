@@ -6,6 +6,7 @@ use review_algorithms::{review_fsrs, review_sm2};
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let migrations: Vec<Migration> = vec![
+        // Decks and card
         Migration {
             version: 1,
             description: "create decks table",
@@ -37,6 +38,7 @@ pub fn run() {
             )",
             kind: MigrationKind::Up,
         },
+        // Tags
         Migration {
             version: 3,
             description: "create tags table",
@@ -71,8 +73,24 @@ pub fn run() {
             updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
             )",
             kind: MigrationKind::Up,
+        },
+
+        // Individual settings
+        Migration {
+            version: 6,
+            description: "insert default settings",
+            sql: r#"
+            INSERT OR IGNORE INTO settings (key, value, value_type, description) 
+            VALUES ('daily_card_limit', '20', 'integer', 'The number of flashcards to study daily');
+
+            INSERT OR IGNORE INTO settings (key, value, value_type, description) 
+            VALUES ('user_name', 'User', 'string', 'The name of the user');
+            "#,
+            kind: MigrationKind::Up,
         }
     ];
+    
+
 
     tauri::Builder::default()
         .plugin(

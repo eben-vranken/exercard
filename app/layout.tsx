@@ -39,6 +39,16 @@ declare global {
   interface CardWithTags extends Card {
     tags: Tag[]
   }
+
+  interface Setting {
+    id: number;
+    key: string;
+    value: string;
+    valueType: 'string' | 'number' | 'boolean';
+    description: string;
+    createdAt: string;
+    updatedAt: string;
+  }
 }
 
 const inter = localFont({
