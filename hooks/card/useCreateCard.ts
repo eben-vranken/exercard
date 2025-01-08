@@ -9,7 +9,7 @@ interface NewCard {
 
 const useCreateCard = async (card: NewCard): Promise<{ status: string, message: string }> => {
     try {
-        const db = await Database.load("sqlite:decks.db");
+        const db = await Database.load("sqlite:exercard.db");
 
         await db.execute("BEGIN TRANSACTION");
 

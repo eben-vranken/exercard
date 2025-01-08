@@ -3,7 +3,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import Sidebar from "@/components/UI/static/Sidebar";
-import { useEffect } from "react";
 
 declare global {
   interface Window {

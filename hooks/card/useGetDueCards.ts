@@ -8,7 +8,7 @@ interface UseGetCardsResponse {
 
 const useGetDueCards = async (deckId: number): Promise<UseGetCardsResponse> => {
     try {
-        const db = await Database.load("sqlite:decks.db");
+        const db = await Database.load("sqlite:exercard.db");
         const currentTimestamp = Math.floor(Date.now() / 1000);
 
         const result: any = await db.select(`

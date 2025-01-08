@@ -2,7 +2,7 @@ import Database from "@tauri-apps/plugin-sql"
 
 const useGetDecks = async () => {
     try {
-        const db = await Database.load('sqlite:decks.db');
+        const db = await Database.load('sqlite:exercard.db');
         const dbDecks = await db.select<Deck[]>("SELECT * FROM decks");
         return { status: 'ok', decks: dbDecks }
     } catch (err: unknown) {

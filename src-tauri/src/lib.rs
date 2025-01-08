@@ -57,13 +57,27 @@ pub fn run() {
                 FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
             )",
             kind: MigrationKind::Up,
+        },
+        Migration {
+            version: 5,
+            description: "create settings table",
+            sql: "CREATE TABLE IF NOT EXISTS settings (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            key TEXT NOT NULL UNIQUE,
+            value TEXT,
+            value_type TEXT NOT NULL,
+            description TEXT,
+            created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )",
+            kind: MigrationKind::Up,
         }
     ];
 
     tauri::Builder::default()
         .plugin(
             tauri_plugin_sql::Builder::default()
-                .add_migrations("sqlite:decks.db", migrations)
+                .add_migrations("sqlite:exercard.db", migrations)
                 .build())
         .setup(|app| {
             if cfg!(debug_assertions) {

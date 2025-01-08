@@ -14,7 +14,7 @@ interface CreateDeckResult {
 
 const useCreateDeck = async ({ name, description }: Deck): Promise<CreateDeckResult> => {
     try {
-        const db = await Database.load("sqlite:decks.db");
+        const db = await Database.load("sqlite:exercard.db");
         await db.execute("INSERT INTO decks (name, description) VALUES ($1, $2)", [
             name,
             description,

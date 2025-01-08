@@ -2,7 +2,7 @@ import Database from "@tauri-apps/plugin-sql";
 
 const useGetSpecificDeck = async (deckId: string): Promise<{ status: string, deck?: Deck, message?: string }> => {
     try {
-        const db = await Database.load("sqlite:decks.db");
+        const db = await Database.load("sqlite:exercard.db");
 
         const result = await db.select<Deck[]>("SELECT * FROM decks WHERE id = $1", [deckId]);
 

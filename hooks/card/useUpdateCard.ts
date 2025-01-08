@@ -16,7 +16,7 @@ interface UpdateCardProps {
 }
 
 const useUpdateCard = async (card: UpdateCardProps): Promise<void> => {
-    const db = await Database.load("sqlite:decks.db");
+    const db = await Database.load("sqlite:exercard.db");
 
     if (card.next_review instanceof Date) {
         card.next_review = card.next_review.getTime();

@@ -8,7 +8,7 @@ interface EditDeckProps {
 
 const useEditDeck = async ({ id, name, description }: EditDeckProps): Promise<{ status: string; message: string }> => {
     try {
-        const db = await Database.load("sqlite:decks.db");
+        const db = await Database.load("sqlite:exercard.db");
 
         const updatedRows = await db.execute(
             "UPDATE decks SET name = $1, description = $2 WHERE id = $3",

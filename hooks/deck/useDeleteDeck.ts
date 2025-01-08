@@ -9,7 +9,7 @@ interface Deck {
 const useDeleteDeck = async (deck: Deck): Promise<{ status: string, message: string }> => {
     try {
         console.log("Deleting deck:", deck);
-        const db = await Database.load('sqlite:decks.db');
+        const db = await Database.load('sqlite:exercard.db');
 
         await db.execute('PRAGMA foreign_keys = ON;');
 
