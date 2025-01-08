@@ -4,6 +4,7 @@ import useGetDecks from "@/hooks/deck/useGetDecks";
 import { BaseDirectory, watch } from "@tauri-apps/plugin-fs";
 import { useEffect, useState } from "react";
 import CustomLink from "../Link";
+import LoadingCircle from "../../static/LoadingCircle";
 
 const DeckList: React.FC = () => {
     const [userDecks, setUserDecks] = useState<Deck[]>();
@@ -34,8 +35,8 @@ const DeckList: React.FC = () => {
     }, [])
 
     if (!userDecks) return (
-        < section className="flex flex-col gap-y-2 text-light" >
-            <p>Loading decks...</p>
+        < section className="flex justify-center items-center h-full gap-y-2 text-light" >
+            <LoadingCircle />
         </section >
     )
 
