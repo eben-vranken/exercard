@@ -59,6 +59,10 @@ body {
   color: rgb(59 130 246 / 0.75);
 }
 
+form label {
+  opacity: 50%;
+}
+
 
 ::-webkit-scrollbar {
   width: 5px;
@@ -296,4 +300,3 @@ body {
 .toast-animation-bottom {
   animation: toast-animation-bottom 1s ease-in-out forwards;
 }
-
