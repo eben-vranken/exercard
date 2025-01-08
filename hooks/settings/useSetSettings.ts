@@ -5,7 +5,6 @@ const useSetSettings = async (settings: { [key: string]: string | number }) => {
         const db = await Database.load("sqlite:exercard.db");
 
         const updatePromises = Object.entries(settings).map(async ([key, value]) => {
-            console.log('Applying setting:', key, value);
             await db.execute(
                 "UPDATE settings SET value = ? WHERE key = ?",
                 [value, key]
@@ -14,7 +13,9 @@ const useSetSettings = async (settings: { [key: string]: string | number }) => {
 
         await Promise.all(updatePromises);
 
-        return { status: 'ok' };
+        const result = await db.select<Setting[]>("SELECT * FROM settings");
+
+        return { status: 'ok', settings: result };
     } catch (err: unknown) {
         if (err instanceof Error) {
             return { status: 'error', message: `Failed to update settings: ${err.message}` };

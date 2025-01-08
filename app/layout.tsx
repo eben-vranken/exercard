@@ -5,6 +5,7 @@ import "./globals.css";
 import Sidebar from "@/components/UI/static/Sidebar";
 import { useEffect, useState } from "react";
 import useGetAllSettings from "@/hooks/settings/useGetAllSettings";
+import { SettingsProvider } from "@/context/SettingsContext";
 
 declare global {
   interface Window {
@@ -72,8 +73,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased flex h-screen select-none overflow-hidden`}>
-        <Sidebar />
-        {children}
+        <SettingsProvider>
+          <Sidebar />
+          {children}
+        </SettingsProvider>
       </body>
     </html>
   );

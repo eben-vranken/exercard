@@ -1,12 +1,12 @@
 'use client'
 
 import Navbar from "@/components/UI/functional/Navbar";
-import useGetAllSettings from "@/hooks/settings/useGetAllSettings";
-import useSetSettings from "@/hooks/settings/useSetSettings";
+import { useSettings } from "@/context/SettingsContext";
 import { useState, useEffect } from "react";
 import Toast from "@/components/UI/functional/Toast";
 
 const Settings: React.FC = () => {
+    const { settings, updateSettings } = useSettings();
     const [initialSettings, setInitialSettings] = useState<{ [key: string]: string | number }>({});
     const [isChanged, setIsChanged] = useState(false);
     const [toast, setToast] = useState<{ visible: boolean; text: string }>({ visible: false, text: "" });
@@ -28,15 +28,10 @@ const Settings: React.FC = () => {
             }
         }
 
-        const result = await useSetSettings(formData);
-
-        if (result.status === "ok") {
-            showToast("Settings saved successfully!");
-            setInitialSettings(formData); // Update initial settings after successful save
-            setIsChanged(false); // Reset the "changed" state
-        } else {
-            showToast("Failed to update settings. Please try again.");
-        }
+        await updateSettings(formData);
+        showToast("Settings saved successfully!");
+        setInitialSettings(formData);
+        setIsChanged(false);
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -50,29 +45,24 @@ const Settings: React.FC = () => {
     };
 
     useEffect(() => {
-        const fetchSettings = async () => {
-            const result = await useGetAllSettings();
+        if (settings) {
+            const settingsMap: { [key: string]: string | number } = {
+                user_name: settings.username,
+                daily_card_limit: settings.dailyCardLimit,
+            };
+            setInitialSettings(settingsMap);
 
-            if (result.settings && result.settings.length > 0) {
-                const settingsMap: { [key: string]: string | number } = {};
-                result.settings.forEach((setting) => {
-                    settingsMap[setting.key] = setting.value;
+            Object.entries(settingsMap).forEach(([key, value]) => {
+                const element = document.querySelector(
+                    `[name=${key}], [id=${key}]`
+                ) as HTMLInputElement | HTMLSelectElement;
 
-                    const element = document.querySelector(
-                        `[name=${setting.key}], [id=${setting.key}]`
-                    ) as HTMLInputElement | HTMLSelectElement;
-
-                    if (element && (element.type === "number" || element.type === "text")) {
-                        element.value = setting.value;
-                    }
-                });
-
-                setInitialSettings(settingsMap); // Store initial settings
-            }
-        };
-
-        fetchSettings();
-    }, []);
+                if (element && (element.type === "number" || element.type === "text")) {
+                    element.value = value.toString();
+                }
+            });
+        }
+    }, [settings]);
 
     return (
         <section className="w-full flex flex-col">

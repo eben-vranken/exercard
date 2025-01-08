@@ -1,6 +1,14 @@
+'use client'
+
 import Navbar from "@/components/UI/functional/Navbar";
+import LoadingCircle from "@/components/UI/static/LoadingCircle";
+import { useSettings } from "@/context/SettingsContext";
 
 export default function Home() {
+  const { settings, loading, error } = useSettings();
+
+  if (loading) { return <section className="w-full h-full flex justify-center items-center"><LoadingCircle /></section> }
+
   return (
     <main className="w-full flex flex-col">
       <Navbar />
@@ -8,7 +16,7 @@ export default function Home() {
       <section className="p-[10px] h-full flex flex-col ">
         {/* Welcome message */}
         <section className="mb-2 ">
-          <h2 className="text-responsive-md font-semibold">Welcome Eben</h2>
+          <h2 className="text-responsive-md font-semibold">Welcome {settings?.username}</h2>
           <p className="text-responsive-sm text-light">
             Ready to level up your language learning?
           </p>
