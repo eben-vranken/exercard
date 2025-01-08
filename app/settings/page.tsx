@@ -71,12 +71,12 @@ const Settings: React.FC = () => {
 
                 <section className="grid grid-cols-1 md:grid-cols-2 gap-3 overflow-y-scroll">
                     {/* User profile settings */}
-                    <section className="flex flex-col gap-y-2 p-3 border border-light rounded cursor-not-allowed opacity-50">
+                    <section className="flex flex-col gap-y-2 p-3 border border-light rounded">
                         <h2 className="text-responsive-md font-semibold">
                             User Profile
                         </h2>
 
-                        <section className="flex items-center justify-between gap-y-2 pointer-events-none">
+                        <section className="flex items-center justify-between gap-y-2">
                             <label htmlFor="user_name" className="text-responsive-sm">Username:</label>
                             <input type="text" id="user_name" className="styled-input" />
                         </section>
@@ -102,7 +102,7 @@ const Settings: React.FC = () => {
 
                         <section className="flex items-center justify-between gap-y-2 pointer-events-none">
                             <label htmlFor="primary_color" className="text-responsive-sm">Primary color:</label>
-                            <input type="text" id="primary_color" className="styled-input" />
+                            <input type="color" id="primary_color" className="styled-input" />
                         </section>
                     </section>
                 </section>

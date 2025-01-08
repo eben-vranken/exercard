@@ -66,7 +66,7 @@ pub fn run() {
             sql: "CREATE TABLE IF NOT EXISTS settings (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             key TEXT NOT NULL UNIQUE,
-            value TEXT,
+            value TEXT NOT NULL,
             value_type TEXT NOT NULL,
             description TEXT,
             created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,

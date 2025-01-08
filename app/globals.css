@@ -8,7 +8,7 @@
   --text-medium: rgba(255, 255, 255, 0.75);
   --text-light: rgba(255, 255, 255, 0.5);
   --text-ultralight: rgba(255, 255, 255, 0.25);
-  --primary: 67, 87, 236;
+  --primary: 67 87 236;
 }
 
 body {

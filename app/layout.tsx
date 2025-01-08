@@ -3,6 +3,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import Sidebar from "@/components/UI/static/Sidebar";
+import { useEffect, useState } from "react";
+import useGetAllSettings from "@/hooks/settings/useGetAllSettings";
 
 declare global {
   interface Window {
@@ -49,6 +51,11 @@ declare global {
     createdAt: string;
     updatedAt: string;
   }
+
+  interface UserSettings {
+    dailyCardLimit: number
+    username: string;
+  }
 }
 
 const inter = localFont({
@@ -62,7 +69,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased flex h-screen select-none overflow-hidden`}>

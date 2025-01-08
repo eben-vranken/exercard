@@ -5,6 +5,7 @@ const useSetSettings = async (settings: { [key: string]: string | number }) => {
         const db = await Database.load("sqlite:exercard.db");
 
         const updatePromises = Object.entries(settings).map(async ([key, value]) => {
+            console.log('Applying setting:', key, value);
             await db.execute(
                 "UPDATE settings SET value = ? WHERE key = ?",
                 [value, key]
