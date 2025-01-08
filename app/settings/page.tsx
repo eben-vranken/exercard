@@ -143,7 +143,9 @@ const Settings: React.FC = () => {
             </form>
 
             {/* Toast */}
-            {toast.visible && <Toast text={toast.text} position="top" />}
+            <section className="w-full flex justify-center">
+                {toast.visible && <Toast text={toast.text} position="top" />}
+            </section>
         </section>
     );
 };
