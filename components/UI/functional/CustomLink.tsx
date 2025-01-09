@@ -14,13 +14,13 @@ interface LinkProps {
 const CustomLink: React.FC<LinkProps> = ({ content, href = "", back = false, deck = false, deckId }) => {
     const router = useRouter();
     const pathname = usePathname();
-    const searchParams = useSearchParams();
 
     let isActive = false;
 
     if (!deck) {
         isActive = href === "/" ? pathname === href : pathname.startsWith(href);
     } else {
+        const searchParams = useSearchParams();
         const currentDeckId = searchParams.get("deckId");
         console.log(currentDeckId, deckId);
         if (deckId && currentDeckId === deckId) {
