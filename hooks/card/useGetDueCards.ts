@@ -13,7 +13,6 @@ const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<U
         const db = await Database.load("sqlite:exercard.db");
         const currentTimestamp = Math.floor(Date.now() / 1000);
 
-        // First, fetch the deck's current status: how many new cards have been reviewed today
         const deckStatus: any = await db.select(`
             SELECT last_review_date, new_cards_reviewed_today
             FROM decks
@@ -23,14 +22,8 @@ const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<U
         const newCardsReviewedToday = deckStatus[0]?.new_cards_reviewed_today;
         const dailyLimit = dailyCardLimit;
 
-        // Calculate the remaining new cards to be reviewed today
         const remainingNewCards = dailyLimit - newCardsReviewedToday;
 
-        console.log("Daily Limit", dailyLimit)
-        console.log("New cards reviewed today", newCardsReviewedToday)
-        console.log("Remaining cards:", remainingNewCards)
-
-        // 1. Fetch all due cards with new = 0 (already reviewed cards)
         const dueCardsResult = await db.select(`
             SELECT 
                 c.*, 
@@ -46,7 +39,6 @@ const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<U
             ORDER BY c.next_review ASC
         `, [deckId, currentTimestamp]);
 
-        // 2. Fetch the remaining new cards up to the daily limit
         const newCardsResult = remainingNewCards > 0 ? await db.select(`
             SELECT 
                 c.*,
@@ -62,7 +54,6 @@ const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<U
             LIMIT $2`,
             [deckId, remainingNewCards]) : [];
 
-        // Process cards with tags
         const processCards = (cards: any) => {
             return cards.map((row: { [x: string]: any; tag_ids: string; tag_names: string }) => {
                 const tagIds = row.tag_ids ? row.tag_ids.split(',').map(Number) : [];
@@ -70,7 +61,7 @@ const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<U
 
                 const tags = tagIds.map((id, index) => ({
                     id,
-                    name: tagNames[index] || '' // Fallback to empty string if name is missing
+                    name: tagNames[index] || ''
                 }));
 
                 const { tag_ids, tag_names, ...cardData } = row;
@@ -86,7 +77,7 @@ const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<U
 
         return {
             status: 'ok',
-            data: [...dueCardsWithTags, ...newCardsWithTags] // Return combined data
+            data: [...dueCardsWithTags, ...newCardsWithTags]
         };
     } catch (err: unknown) {
         return {
