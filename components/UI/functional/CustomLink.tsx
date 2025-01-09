@@ -22,7 +22,6 @@ const CustomLink: React.FC<LinkProps> = ({ content, href = "", back = false, dec
     } else {
         const searchParams = useSearchParams();
         const currentDeckId = searchParams.get("deckId");
-        console.log(currentDeckId, deckId);
         if (deckId && currentDeckId === deckId) {
             isActive = true;
         }

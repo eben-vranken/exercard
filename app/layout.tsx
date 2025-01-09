@@ -32,6 +32,7 @@ declare global {
     interval: number;
     grade: number;
     next_review: number;
+    new: number;
   }
 
   interface Tag {

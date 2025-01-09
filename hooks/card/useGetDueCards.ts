@@ -6,7 +6,7 @@ interface UseGetCardsResponse {
     message?: string;
 }
 
-const useGetDueCards = async (deckId: number): Promise<UseGetCardsResponse> => {
+const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<UseGetCardsResponse> => {
     try {
         const db = await Database.load("sqlite:exercard.db");
         const currentTimestamp = Math.floor(Date.now() / 1000);

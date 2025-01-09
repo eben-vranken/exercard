@@ -10,11 +10,13 @@ import useDeleteDeck from "@/hooks/deck/useDeleteDeck";
 import useGetCards from "@/hooks/card/useGetCards";
 import Link from "next/link";
 import useGetDueCards from "@/hooks/card/useGetDueCards";
+import { useSettings } from "@/context/SettingsContext";
 
 function DeckContent() {
     const router = useRouter()
     const searchParams = useSearchParams();
     const deckId = searchParams.get('deckId') || '';
+    const { settings, loading, error } = useSettings();
 
     const [deck, setDeck] = useState<Deck | null>(null);
     const [cards, setCards] = useState<Card[] | null>(null);
@@ -58,7 +60,7 @@ function DeckContent() {
 
         const fetchDueCards = async () => {
             if (deck) {
-                const results = await useGetDueCards(deck.id)
+                const results = await useGetDueCards(deck.id, settings?.dailyCardLimit || 10);
                 if (results.status === 'ok' && results.data) {
                     setDueCards(results.data);
                 } else {
