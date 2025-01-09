@@ -13,6 +13,7 @@ interface UpdateCardProps {
     interval?: number;
     grade?: number;
     next_review?: number | Date;
+    new?: number;
 }
 
 const useUpdateCard = async (card: UpdateCardProps): Promise<void> => {

@@ -64,7 +64,7 @@ const CardReview: React.FC = () => {
         console.log(cards[0]);
 
         try {
-            const result = await useReviewCard(cards[0], Number(grade), reviewAlgorithm);
+            const result = await useReviewCard(cards[0], Number(grade), reviewAlgorithm, Number(deckId));
 
             if (result.status === 'ok' && result.next_review) {
                 setIsTransitioning(true);

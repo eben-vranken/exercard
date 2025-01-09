@@ -17,6 +17,8 @@ declare global {
     name: string;
     description: string;
     algorithm: string;
+    lastReviewDate: number;
+    newCardsReviewedToday: number;
   }
 
   interface Card {

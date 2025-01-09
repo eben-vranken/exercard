@@ -1,3 +1,4 @@
+import { useSettings } from "@/context/SettingsContext";
 import Database from "@tauri-apps/plugin-sql";
 
 interface UseGetCardsResponse {
@@ -7,14 +8,25 @@ interface UseGetCardsResponse {
 }
 
 const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<UseGetCardsResponse> => {
+
     try {
         const db = await Database.load("sqlite:exercard.db");
         const currentTimestamp = Math.floor(Date.now() / 1000);
 
-        // Fetch due cards
-        const dueCards: any = await db.select(`
+        const deckStatus: any = await db.select(`
+            SELECT last_review_date, new_cards_reviewed_today
+            FROM decks
+            WHERE id = $1
+        `, [deckId]);
+
+        const newCardsReviewedToday = deckStatus[0]?.new_cards_reviewed_today;
+        const dailyLimit = dailyCardLimit;
+
+        const remainingNewCards = dailyLimit - newCardsReviewedToday;
+
+        const dueCardsResult = await db.select(`
             SELECT 
-                c.*,
+                c.*, 
                 GROUP_CONCAT(t.id) as tag_ids,
                 GROUP_CONCAT(t.name) as tag_names
             FROM cards c
@@ -24,12 +36,10 @@ const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<U
             AND c.next_review <= $2
             AND c.new = 0
             GROUP BY c.id
-            ORDER BY c.next_review ASC`,
-            [deckId, currentTimestamp]
-        );
+            ORDER BY c.next_review ASC
+        `, [deckId, currentTimestamp]);
 
-        // Fetch new cards
-        const newCards: any = await db.select(`
+        const newCardsResult = remainingNewCards > 0 ? await db.select(`
             SELECT 
                 c.*,
                 GROUP_CONCAT(t.id) AS tag_ids,
@@ -42,10 +52,8 @@ const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<U
             GROUP BY c.id
             ORDER BY c.next_review ASC
             LIMIT $2`,
-            [deckId, dailyCardLimit]
-        );
+            [deckId, remainingNewCards]) : [];
 
-        // Process cards with tags
         const processCards = (cards: any) => {
             return cards.map((row: { [x: string]: any; tag_ids: string; tag_names: string }) => {
                 const tagIds = row.tag_ids ? row.tag_ids.split(',').map(Number) : [];
@@ -53,7 +61,7 @@ const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<U
 
                 const tags = tagIds.map((id, index) => ({
                     id,
-                    name: tagNames[index] || '' // Fallback to empty string if name is missing
+                    name: tagNames[index] || ''
                 }));
 
                 const { tag_ids, tag_names, ...cardData } = row;
@@ -64,12 +72,12 @@ const useGetDueCards = async (deckId: number, dailyCardLimit: number): Promise<U
             });
         };
 
-        const dueCardsWithTags = processCards(dueCards);
-        const newCardsWithTags = processCards(newCards);
+        const dueCardsWithTags = processCards(dueCardsResult);
+        const newCardsWithTags = processCards(newCardsResult);
 
         return {
             status: 'ok',
-            data: [...dueCardsWithTags, ...newCardsWithTags] // Return combined data
+            data: [...dueCardsWithTags, ...newCardsWithTags]
         };
     } catch (err: unknown) {
         return {

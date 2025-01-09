@@ -14,7 +14,9 @@ pub fn run() {
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
                 description TEXT,
-                algorithm TEXT NOT NULL DEFAULT 'sm2'
+                algorithm TEXT NOT NULL DEFAULT 'sm2',
+                last_review_date INTEGER DEFAULT 0,
+                new_cards_reviewed_today INTEGER DEFAULT 0
             )",
             kind: MigrationKind::Up,
         },
