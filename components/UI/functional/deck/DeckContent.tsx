@@ -59,8 +59,8 @@ function DeckContent() {
         fetchCards();
 
         const fetchDueCards = async () => {
-            if (deck) {
-                const results = await useGetDueCards(deck.id, settings?.dailyCardLimit || 10);
+            if (deck && settings) {
+                const results = await useGetDueCards(deck.id, settings.dailyCardLimit);
                 if (results.status === 'ok' && results.data) {
                     setDueCards(results.data);
                 } else {
@@ -70,7 +70,7 @@ function DeckContent() {
 
         }
         fetchDueCards();
-    }, [deck])
+    }, [deck, settings])
 
     // Delete deck
     const handleDeleteDeck = async () => {

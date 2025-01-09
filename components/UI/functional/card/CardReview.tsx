@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Toast from "../Toast";
 import PostReviewAnalytics from "./PostReviewAnalytics";
+import { useSettings } from "@/context/SettingsContext";
 
 const formatNextReview = (nextReview: number | null) => {
     if (!nextReview) return '';
@@ -32,6 +33,7 @@ const CardReview: React.FC = () => {
     const searchParams = useSearchParams();
     const deckId = searchParams.get('deckId') || '';
     const reviewAlgorithm = searchParams.get('reviewAlgorithm') || '';
+    const { settings, loading, error } = useSettings();
 
     const [flipped, setFlipped] = useState<boolean>(false);
     const [answered, setAnswered] = useState<boolean>(false);
@@ -46,7 +48,7 @@ const CardReview: React.FC = () => {
 
     useEffect(() => {
         const fetchDueCards = async () => {
-            const results = await useGetDueCards(Number(deckId))
+            const results = await useGetDueCards(Number(deckId), Number(settings?.dailyCardLimit));
             if (results.status === 'ok' && results.data) {
                 setCards(results.data);
             } else {
@@ -54,7 +56,7 @@ const CardReview: React.FC = () => {
             }
         }
         fetchDueCards();
-    }, [deckId])
+    }, [deckId, settings])
 
     const handleReview = async (grade: number) => {
         if (isTransitioning) return;

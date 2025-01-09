@@ -55,7 +55,7 @@ declare global {
   }
 
   interface UserSettings {
-    dailyCardLimit: number
+    dailyCardLimit: number;
     username: string;
   }
 }
