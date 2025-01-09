@@ -40,7 +40,7 @@ const CustomLink: React.FC<LinkProps> = ({ content, href = "", back = false, dec
             className={`w-fit hover:opacity-75 cursor-pointer ${isActive ? 'text-primary opacity-75' : ''}`}
         >
             {href && !back ? (
-                <>
+                <section className="flex items-center gap-x-2">
                     {
                         isDue && (
                             <section className="w-2 aspect-square rounded-full bg-primary">
@@ -51,7 +51,7 @@ const CustomLink: React.FC<LinkProps> = ({ content, href = "", back = false, dec
                     <Link href={href}>
                         {content}
                     </Link>
-                </>
+                </section>
             ) : (
                 content
             )}
