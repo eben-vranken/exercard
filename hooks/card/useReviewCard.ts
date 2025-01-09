@@ -45,7 +45,7 @@ const useReviewCard = async (card: Card, grade: number, algorithm: string, deckI
                         ELSE last_review_date
                     END,
                     new_cards_reviewed_today = CASE
-                        WHEN last_review_date != strftime('%s', 'now', 'start of day') THEN 0
+                        WHEN last_review_date != strftime('%s', 'now', 'start of day') THEN 1
                         ELSE new_cards_reviewed_today + 1
                     END
                 WHERE id = $1;
