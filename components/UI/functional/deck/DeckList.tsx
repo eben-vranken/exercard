@@ -3,8 +3,9 @@
 import useGetDecks from "@/hooks/deck/useGetDecks";
 import { BaseDirectory, watch } from "@tauri-apps/plugin-fs";
 import { useEffect, useState } from "react";
-import CustomLink from "../Link";
+
 import LoadingCircle from "../../static/LoadingCircle";
+import CustomLink from "../CustomLink";
 
 const DeckList: React.FC = () => {
     const [userDecks, setUserDecks] = useState<Deck[]>();
@@ -45,7 +46,7 @@ const DeckList: React.FC = () => {
             {userDecks?.length > 0 ? <section>
                 {
                     userDecks.map((deck, id) => {
-                        return (<CustomLink href={`/deck?deckId=${deck.id}`} key={id} content={deck.name.split('.')[0]}></CustomLink>)
+                        return (<CustomLink href={`/deck?deckId=${deck.id}`} key={id} content={deck.name.split('.')[0]} deckId={deck.id.toString()} deck></CustomLink>)
                     })
                 }
             </section> : <span>No decks</span>}
