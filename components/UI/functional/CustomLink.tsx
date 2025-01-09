@@ -9,9 +9,10 @@ interface LinkProps {
     back?: boolean;
     deck?: boolean;
     deckId?: string;
+    isDue?: boolean;
 }
 
-const CustomLink: React.FC<LinkProps> = ({ content, href = "", back = false, deck = false, deckId }) => {
+const CustomLink: React.FC<LinkProps> = ({ content, href = "", back = false, deck = false, deckId, isDue = false }) => {
     const router = useRouter();
     const pathname = usePathname();
 
@@ -39,9 +40,18 @@ const CustomLink: React.FC<LinkProps> = ({ content, href = "", back = false, dec
             className={`w-fit hover:opacity-75 cursor-pointer ${isActive ? 'text-primary opacity-75' : ''}`}
         >
             {href && !back ? (
-                <Link href={href}>
-                    {content}
-                </Link>
+                <>
+                    {
+                        isDue && (
+                            <section className="w-2 aspect-square rounded-full bg-primary">
+
+                            </section>
+                        )
+                    }
+                    <Link href={href}>
+                        {content}
+                    </Link>
+                </>
             ) : (
                 content
             )}

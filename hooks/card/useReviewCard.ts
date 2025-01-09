@@ -9,13 +9,6 @@ interface UseGetCardsResponse {
     message?: string;
 }
 
-interface ReviewProps {
-    card: Card;
-    grade: number;
-    algorithm: string;
-    deckId: number;
-}
-
 const useReviewCard = async (card: Card, grade: number, algorithm: string, deckId: number): Promise<UseGetCardsResponse> => {
     try {
         const result: Card = await invoke(`review_${algorithm}`, { card, grade });
