@@ -84,7 +84,7 @@ pub fn run() {
             description: "insert default settings",
             sql: r#"
             INSERT OR IGNORE INTO settings (key, value, value_type, description) 
-            VALUES ('daily_card_limit', '20', 'integer', 'The number of flashcards to study daily');
+            VALUES ('daily_card_limit', '10', 'integer', 'The number of flashcards to study daily');
 
             INSERT OR IGNORE INTO settings (key, value, value_type, description) 
             VALUES ('user_name', 'User', 'string', 'The name of the user');
