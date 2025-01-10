@@ -37,7 +37,7 @@
   "plugins": {
     "sql": {
       "preload": [
-        "sqlite:decks.db"
+        "sqlite:exercard.db"
       ]
     }
   }

@@ -90,7 +90,27 @@ pub fn run() {
             VALUES ('user_name', 'User', 'string', 'The name of the user');
             "#,
             kind: MigrationKind::Up,
-        }
+        },
+        
+        // Review Analytics
+        Migration {
+            version: 7,
+            description: "create reviews table",
+            sql: r#"
+            CREATE TABLE IF NOT EXISTS reviews (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                deck_id INTEGER NOT NULL,
+                review_date INTEGER NOT NULL,
+                cards_reviewed INTEGER NOT NULL DEFAULT 0,
+                correct_answers INTEGER NOT NULL DEFAULT 0,
+                wrong_answers INTEGER NOT NULL DEFAULT 0,
+                average_grade REAL NOT NULL DEFAULT 0.0,
+                session_duration INTEGER NOT NULL DEFAULT 0,
+                FOREIGN KEY(deck_id) REFERENCES decks(id)
+            )
+            "#,
+            kind: MigrationKind::Up,
+        },
     ];
     
 
