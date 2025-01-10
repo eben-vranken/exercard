@@ -18,7 +18,7 @@ export default function Home() {
         <section className="mb-2 ">
           <h2 className="text-responsive-md font-semibold">Welcome {settings?.username}</h2>
           <p className="text-responsive-sm text-light">
-            Ready to level up your language learning?
+            Ready to level up your learning?
           </p>
         </section>
 
